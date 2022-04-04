@@ -1,29 +1,42 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
-import {Todolist} from "./Todolist";
+import {TaskType, Todolist} from './Todolist';
 
 function App() {
-    const arr1=[
-        {id: 1, title: "HTML&CSS1", isDone: true},
-        {id: 2, title: "JS1", isDone: true},
-        {id: 3, title: "ReactJS1", isDone: false},
-        {id: 4, title: "Rest API1", isDone: false},
+    const[tasks1, setTasks1]=useState<Array<TaskType>>( [
+        {id: 1, title: "HTML&CSS", isDone: true},
+        {id: 2, title: "JS", isDone: true},
+        {id: 3, title: "ReactJS", isDone: false},
+        {id: 4, title: "ReactJS", isDone: false}
+    ])
+const [filter,setFilter] =useState('All')
+    const removeTask = (newId: number) => {
+        //tasks1 = tasks1.filter((el) => el.id !== newId)
+        setTasks1(tasks1.filter((el) => el.id !== newId))
+        //console.log(tasks1)
+    }
+    let filteredTask=tasks1
+    if (filter==='Active') {
+        filteredTask=tasks1.filter((el)=>!el.isDone)
+    }
+    if (filter==='Completed') {
+        filteredTask=tasks1.filter((el)=>el.isDone)
+    }
+    const changeFilter=(filterValue:string)=>{
+setFilter(filterValue)
 
-    ]
-
-    const arr2=[
-        {id: 1, title: "HTML&CSS222", isDone: true},
-        {id: 2, title: "JS222", isDone: true},
-        {id: 3, title: "ReactJS2222", isDone: false},
-        {id: 4, title: "Rest API22222", isDone: false},
-        {id: 5, title: "GraphQL22222", isDone: false},
-    ]
+        console.log('uighui')
+    }
 
     return (
         <div className="App">
-            <Todolist topic1={'What to learn 11111'} arr={arr1}/>
-            <Todolist topic1={'What to learn 22222'} arr={arr2}/>
-           </div>
+            <Todolist
+                title="What to learn"
+                tasks={filteredTask}
+                removeTask={removeTask}
+                changeFilter={changeFilter}
+            />
+        </div>
     );
 }
 
