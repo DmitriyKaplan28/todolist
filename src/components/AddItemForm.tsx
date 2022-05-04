@@ -22,7 +22,7 @@ const AddItemForm = (props:AddItemFormPropsType) => {
         setTitle(e.currentTarget.value)
     }
     const onKeyPressAddItem = (e: KeyboardEvent<HTMLInputElement>) => {
-        if (e.charCode === 13) {
+        if (e.key === "Enter") {
             onClickAddItem();
         }
     }

@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import './App.css';
 import {TaskType, Todolist} from './Todolist';
 import {v1} from 'uuid';
+import AddItemForm from "./components/AddItemForm";
 
 export type FilterValuesType = "all" | "active" | "completed";
 export type TodoListType = {
@@ -45,20 +46,38 @@ function App() {
     }
 
     const CheckBoxChange = (todoListID: string, currentID: string, checkedValue: boolean) => {
-
         setTasks({
             ...tasks,
             [todoListID]: tasks[todoListID].map(el => el.id === currentID ? {...el, isDone: checkedValue} : el)
         })
     }
+    const changeTaskTitle = (todoListID: string, currentID: string, title: string) => {
+        setTasks({
+            ...tasks,
+            [todoListID]: tasks[todoListID].map(el => el.id === currentID ? {...el, title} : el)
+        })
+    }
 
-    function changeFilter(todoListID: string, value: FilterValuesType) {
+    function changeTodoListFilter(todoListID: string, value: FilterValuesType) {
         setTodoLists(todoLists.map(tl => tl.id === todoListID ? {...tl, filter: value} : tl))
+    }
+    function changeTodoListTitle(todoListID: string, title: string) {
+        setTodoLists(todoLists.map(tl => tl.id === todoListID ? {...tl, title} : tl))
     }
 
     const removeTodoList = (todoListID: string) => {
         setTodoLists(todoLists.filter(tl => tl.id !== todoListID))
         delete tasks[todoListID]
+    }
+    const addTodoList = (title: string) => {
+        const newTodoListID = v1()
+        const newTodoList: TodoListType = {
+            id: newTodoListID,
+            title: title,
+            filter: 'all'
+        }
+        setTodoLists([...todoLists, newTodoList])
+        setTasks( {...tasks, [newTodoListID]:[]})
     }
 
     const todoListsForRender = todoLists.map(tl => {
@@ -80,16 +99,18 @@ function App() {
 
                 removeTodoList={removeTodoList}
                 removeTask={removeTask}
-                changeFilter={changeFilter}
+                changeTodoListFilter={changeTodoListFilter}
                 addTask={addTask}
                 CheckBoxChange={CheckBoxChange}
-
+                changeTaskTitle={changeTaskTitle}
+                changeTodoListTitle={changeTodoListTitle}
             />
         )
     })
 
     return (
         <div className="App">
+            <AddItemForm addItem={addTodoList}/>
             {todoListsForRender}
         </div>
     );
