@@ -45,11 +45,6 @@ function App() {
     }
 
     const CheckBoxChange = (todoListID: string, currentID: string, checkedValue: boolean) => {
-        /*        const tasksForCurrentTodoList = tasks[todoListID]
-                const updatedTasks = tasksForCurrentTodoList.map(el => el.id === currentID ? {...el, isDone: checkedValue} : el)
-                const copyTasks = {...tasks}
-                copyTasks[todoListID] = updatedTasks
-                setTasks(copyTasks)*/
 
         setTasks({
             ...tasks,
