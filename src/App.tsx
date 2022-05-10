@@ -95,7 +95,7 @@ function App() {
         return (
             <Grid item key={tl.id}>
                 <Paper
-                    variant={'outlined'} style={{padding: "20px"}}>
+                    variant={'outlined'} style={{padding: "20px"}} elevation={10}>
                     <Todolist
 
                         todoListID={tl.id}
@@ -130,10 +130,10 @@ function App() {
                 </Toolbar>
             </AppBar>
             <Container fixed>
-                <Grid container style={{padding: "20px"}}>
+                <Grid container style={{padding: "20px 0 px"}}>
                     <AddItemForm addItem={addTodoList}/>
                 </Grid>
-                <Grid container>
+                <Grid container spacing={5}>
                     {todoListsForRender}
                 </Grid>
             </Container>
