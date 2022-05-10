@@ -3,6 +3,8 @@ import './App.css';
 import {TaskType, Todolist} from './Todolist';
 import {v1} from 'uuid';
 import AddItemForm from "./components/AddItemForm";
+import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@material-ui/core";
+import {Menu} from "@material-ui/icons";
 
 export type FilterValuesType = "all" | "active" | "completed";
 export type TodoListType = {
@@ -25,13 +27,13 @@ function App() {
         [todoListID_1]: [
             {id: v1(), title: "HTML&CSS", isDone: true},
             {id: v1(), title: "JS", isDone: true},
-            {id: v1(), title: "ReactJS", isDone: true},
+            {id: v1(), title: "ReactJS", isDone: false},
         ],
         [todoListID_2]: [
             {id: v1(), title: "Milk", isDone: true},
             {id: v1(), title: "Meat", isDone: true},
-            {id: v1(), title: "3rd thing here", isDone: true},
-            {id: v1(), title: "Bread", isDone: true},
+            {id: v1(), title: "3rd thing here", isDone: false},
+            {id: v1(), title: "Bread", isDone: false},
         ],
     })
 
@@ -61,6 +63,7 @@ function App() {
     function changeTodoListFilter(todoListID: string, value: FilterValuesType) {
         setTodoLists(todoLists.map(tl => tl.id === todoListID ? {...tl, filter: value} : tl))
     }
+
     function changeTodoListTitle(todoListID: string, title: string) {
         setTodoLists(todoLists.map(tl => tl.id === todoListID ? {...tl, title} : tl))
     }
@@ -77,7 +80,7 @@ function App() {
             filter: 'all'
         }
         setTodoLists([...todoLists, newTodoList])
-        setTasks( {...tasks, [newTodoListID]:[]})
+        setTasks({...tasks, [newTodoListID]: []})
     }
 
     const todoListsForRender = todoLists.map(tl => {
@@ -90,28 +93,50 @@ function App() {
         }
 
         return (
-            <Todolist
-                key={tl.id}
-                todoListID={tl.id}
-                title={tl.title}
-                filter={tl.filter}
-                tasks={tasksForTodolist}
+            <Grid item key={tl.id}>
+                <Paper
+                    variant={'outlined'} style={{padding: "20px"}}>
+                    <Todolist
 
-                removeTodoList={removeTodoList}
-                removeTask={removeTask}
-                changeTodoListFilter={changeTodoListFilter}
-                addTask={addTask}
-                CheckBoxChange={CheckBoxChange}
-                changeTaskTitle={changeTaskTitle}
-                changeTodoListTitle={changeTodoListTitle}
-            />
+                        todoListID={tl.id}
+                        title={tl.title}
+                        filter={tl.filter}
+                        tasks={tasksForTodolist}
+
+                        removeTodoList={removeTodoList}
+                        removeTask={removeTask}
+                        changeTodoListFilter={changeTodoListFilter}
+                        addTask={addTask}
+                        CheckBoxChange={CheckBoxChange}
+                        changeTaskTitle={changeTaskTitle}
+                        changeTodoListTitle={changeTodoListTitle}
+                    />
+                </Paper>
+            </Grid>
         )
     })
 
     return (
         <div className="App">
-            <AddItemForm addItem={addTodoList}/>
-            {todoListsForRender}
+            <AppBar position="static">
+                <Toolbar style={{justifyContent: "space-between"}}>
+                    <IconButton edge="start" color="inherit" aria-label="menu">
+                        <Menu/>
+                    </IconButton>
+                    <Typography variant="h6">
+                        Todolists
+                    </Typography>
+                    <Button color="inherit" variant={"outlined"}>Login</Button>
+                </Toolbar>
+            </AppBar>
+            <Container fixed>
+                <Grid container style={{padding: "20px"}}>
+                    <AddItemForm addItem={addTodoList}/>
+                </Grid>
+                <Grid container>
+                    {todoListsForRender}
+                </Grid>
+            </Container>
         </div>
     );
 }

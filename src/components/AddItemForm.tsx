@@ -1,5 +1,7 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import styles from "../Todolist.module.css";
+import PostAddIcon from '@material-ui/icons/PostAdd';
+import {IconButton, TextField} from "@material-ui/core";
 
 type AddItemFormPropsType = {
     addItem: (title:string) => void
@@ -29,13 +31,20 @@ const AddItemForm = (props:AddItemFormPropsType) => {
     return (
         <div>
         <div>
-            <input
-                className={error ? styles.error : ''}
+            <TextField
+                label={'Title'}
+                error={error}
+                helperText={'Enter title'}
+                size={"small"}
+                variant={"outlined"}
                 value={title}
                 onChange={onChangeHandler}
                 onKeyPress={onKeyPressAddItem}
             />
-            <button onClick={onClickAddItem}>+</button>
+            <IconButton onClick={onClickAddItem}>
+                <PostAddIcon />
+            </IconButton>
+            {/*<button onClick={onClickAddItem}>+</button>*/}
         </div>
     {error && <div className={styles.errorMessage}>Title is required</div>}
         </div>
