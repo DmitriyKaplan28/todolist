@@ -41,12 +41,10 @@ function App() {
     function removeTask(todoListID: string, id: string) {
         setTasks({...tasks, [todoListID]: tasks[todoListID].filter(t => t.id != id)});
     }
-
     function addTask(todoListID: string, title: string) {
         let newTask: TaskType = {id: v1(), title: title, isDone: false};
         setTasks({...tasks, [todoListID]: [newTask, ...tasks[todoListID]]});
     }
-
     const CheckBoxChange = (todoListID: string, currentID: string, checkedValue: boolean) => {
         setTasks({
             ...tasks,
@@ -63,11 +61,9 @@ function App() {
     function changeTodoListFilter(todoListID: string, value: FilterValuesType) {
         setTodoLists(todoLists.map(tl => tl.id === todoListID ? {...tl, filter: value} : tl))
     }
-
     function changeTodoListTitle(todoListID: string, title: string) {
         setTodoLists(todoLists.map(tl => tl.id === todoListID ? {...tl, title} : tl))
     }
-
     const removeTodoList = (todoListID: string) => {
         setTodoLists(todoLists.filter(tl => tl.id !== todoListID))
         delete tasks[todoListID]
