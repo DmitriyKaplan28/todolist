@@ -4,19 +4,11 @@ import { AddTodoListAT, RemoveTodoListAT} from "./todolists-reducer";
 
 type RemoveTaskAT = ReturnType<typeof removeTaskAC>
 
-/*{
-    type: 'REMOVE-TASK'
-    taskId: string
-    todoListID: string
-}*/
+
 
 type AddTaskAT = ReturnType<typeof addTaskAC>
 
-/*{
-    type: 'ADD-TASK'
-    title: string
-    todoListID: string
-}*/
+
 
 type ChangeTaskStatusAT = ReturnType<typeof changeTaskStatusAC>
 type ChangeTaskTitleAT = ReturnType<typeof changeTaskTitleAC>

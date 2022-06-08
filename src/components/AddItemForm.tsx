@@ -4,51 +4,54 @@ import PostAddIcon from '@material-ui/icons/PostAdd';
 import {IconButton, TextField} from "@material-ui/core";
 
 type AddItemFormPropsType = {
-    addItem: (title:string) => void
+    addItem: (title: string) => void
 }
 
-const AddItemForm = (props:AddItemFormPropsType) => {
+const AddItemForm = React.memo((props: AddItemFormPropsType) => {
+
     const [title, setTitle] = useState("")
-    const [error, setError] = useState(false)
+    let [error, setError] = useState<string | null>(null)
     const onClickAddItem = () => {
         const trimmedTitle = title.trim()
         if (trimmedTitle) {
             props.addItem(trimmedTitle);
             setTitle("");
         } else {
-            setError(true)
+            setError("Title is required")
         }
     }
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setError(false)
         setTitle(e.currentTarget.value)
     }
     const onKeyPressAddItem = (e: KeyboardEvent<HTMLInputElement>) => {
+        if (error !== null) {
+            setError(null)
+        }
         if (e.key === "Enter") {
             onClickAddItem();
         }
     }
     return (
         <div>
-        <div>
-            <TextField
-                label={'Title'}
-                error={error}
-                helperText={'Enter title'}
-                size={"small"}
-                variant={"outlined"}
-                value={title}
-                onChange={onChangeHandler}
-                onKeyPress={onKeyPressAddItem}
-            />
-            <IconButton onClick={onClickAddItem}>
-                <PostAddIcon />
-            </IconButton>
-            {/*<button onClick={onClickAddItem}>+</button>*/}
-        </div>
-    {error && <div className={styles.errorMessage}>Title is required</div>}
+            <div>
+                <TextField
+                    label={'Title'}
+                    error={!!error}
+                    helperText={error}
+                    size={"small"}
+                    variant={"outlined"}
+                    value={title}
+                    onChange={onChangeHandler}
+                    onKeyPress={onKeyPressAddItem}
+                />
+                <IconButton onClick={onClickAddItem}>
+                    <PostAddIcon/>
+                </IconButton>
+                {/*<button onClick={onClickAddItem}>+</button>*/}
+            </div>
+            {error && <div className={styles.errorMessage}>Title is required</div>}
         </div>
     );
-};
+});
 
 export default AddItemForm;
