@@ -7,7 +7,7 @@ type EditableSpanPropsType = {
 }
 
 const EditableSpan = (props: EditableSpanPropsType) => {
-    console.log('editable span')
+    //console.log('editable span')
     const [title, setTitle] = useState(props.title)
     const [editMode, setEditMode] = useState<boolean>(false)
     const onEditMode = () => setEditMode(true)
