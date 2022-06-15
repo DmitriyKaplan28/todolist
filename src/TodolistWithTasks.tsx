@@ -8,7 +8,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "./state/store";
 import {addTaskAC} from "./reducers/tasks-reducer";
 import {ChangeTodoListFilterAC, ChangeTodoListTitlerAC, RemoveTodoListAC} from "./reducers/todolists-reducer";
-import {Tasks} from "./components/Task";
+import {Task} from "./components/Task";
 
 export type TaskType = {
     id: string
@@ -58,8 +58,8 @@ export const TodolistWithTasks = React.memo(({todolist}: PropsType) => {
         </h3>
         <AddItemForm addItem={addTask}/>
         <List>
-            {tasks.map(t => <Tasks task={t}
-                    todolistID={todolist.id}/>)}
+            {tasks.map(t => <Task task={t}
+                                  todolistID={todolist.id}/>)}
         </List>
         <div>
 

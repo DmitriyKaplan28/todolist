@@ -11,7 +11,7 @@ type TasksType = {
     todolistID: string
 }
 
-export const Tasks = React.memo((props: TasksType) => {
+export const Task = React.memo((props: TasksType) => {
     const dispatch = useDispatch()
 
     const onClickHandler = useCallback(() => dispatch(removeTaskAC(props.task.id, props.todolistID)),[props.task.id, props.todolistID])

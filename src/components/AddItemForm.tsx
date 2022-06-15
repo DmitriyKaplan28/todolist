@@ -3,7 +3,7 @@ import styles from "../Todolist.module.css";
 import PostAddIcon from '@material-ui/icons/PostAdd';
 import {IconButton, TextField} from "@material-ui/core";
 
-type AddItemFormPropsType = {
+export type AddItemFormPropsType = {
     addItem: (title: string) => void
 }
 
