@@ -6,6 +6,7 @@ type TodolistAPIType= {
     order: number
     title: string
 }
+
 export type ResponseType<D = {}> = {
     resultCode: number
     messages: Array<string>
