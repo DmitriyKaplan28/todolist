@@ -1,18 +1,18 @@
 import {
     ActionType,
     AddTodoListAC,
-    ChangeTodoListFilterAC, ChangeTodoListTitlerAC,
+    ChangeTodoListFilterAC, ChangeTodoListTitleAC, FilterValuesType,
     RemoveTodoListAC,
-    todolistsReducer
+    todolistsReducer, TodolistType
 } from './todolists-reducer';
 import {v1} from 'uuid';
-import {FilterValuesType, TodoListType} from '../App';
+
 
 let todolistId1: string
 let todolistId2: string
-let startState: Array<TodoListType>
+let startState: Array<TodolistType>
 
-beforeEach(() => {
+/*beforeEach(() => {
     todolistId1 = v1();
     todolistId2 = v1();
 
@@ -20,7 +20,7 @@ beforeEach(() => {
         {id: todolistId1, title: "What to learn", filter: "all"},
         {id: todolistId2, title: "What to buy", filter: "all"}
     ]
-})
+})*/
 
 test('correct todolist should be removed', () => {
 
@@ -66,7 +66,7 @@ test('correct todolist should change its name', () => {
     title: newTodolistTitle
 };
 
-const endState = todolistsReducer(startState, ChangeTodoListTitlerAC(todolistId2, newTodolistTitle));
+const endState = todolistsReducer(startState, ChangeTodoListTitleAC(todolistId2, newTodolistTitle));
 
 expect(endState[0].title).toBe("What to learn");
 expect(endState[1].title).toBe(newTodolistTitle);

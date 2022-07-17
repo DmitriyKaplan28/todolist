@@ -4,10 +4,10 @@ import EditableSpan from "./EditableSpan";
 import DeleteIcon from "@material-ui/icons/Delete";
 import {changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from "../reducers/tasks-reducer";
 import {useDispatch} from "react-redux";
-import {TaskType} from "../TodolistWithTasks";
+import {TaskAPIType, TaskStatuses} from "../api/task-api";
 
 type TasksType = {
-    task: TaskType,
+    task: TaskAPIType,
     todolistID: string
 }
 
@@ -16,7 +16,7 @@ export const Task = React.memo((props: TasksType) => {
 
     const onClickHandler = useCallback(() => dispatch(removeTaskAC(props.task.id, props.todolistID)),[props.task.id, props.todolistID])
     const onChangeHandler = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-        let newIsDoneValue = event.currentTarget.checked
+        let newIsDoneValue = event.currentTarget.checked ? TaskStatuses.Completed : TaskStatuses.New
         dispatch(changeTaskStatusAC(props.task.id, newIsDoneValue, props.todolistID))
     },[props.task.id, props.todolistID])
     const changeTaskTitle = useCallback((title: string) => {
@@ -28,7 +28,7 @@ export const Task = React.memo((props: TasksType) => {
             <Checkbox
                 size={"small"}
                 color={"primary"}
-                checked={props.task.isDone}
+                checked={props.task.status === TaskStatuses.Completed}
                 onChange={onChangeHandler}/>
             <EditableSpan title={props.task.title} setNewTitle={changeTaskTitle}/>
             <IconButton

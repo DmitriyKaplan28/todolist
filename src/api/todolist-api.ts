@@ -1,10 +1,10 @@
 import axios from 'axios'
 
-type TodolistAPIType= {
+export type TodolistAPIType = {
     id: string
+    title: string
     addedDate: string
     order: number
-    title: string
 }
 
 export type ResponseType<D = {}> = {

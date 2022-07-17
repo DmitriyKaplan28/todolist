@@ -1,10 +1,11 @@
 import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, tasksReducer} from './tasks-reducer';
-import {TaskStateType, TodoListType} from '../App';
-import {AddTodoListAC, RemoveTodoListAC, todolistsReducer} from "./todolists-reducer";
+import {TaskStateType} from '../App';
+import {AddTodoListAC, RemoveTodoListAC, todolistsReducer, TodolistType} from "./todolists-reducer";
+import {TaskStatuses} from "../api/task-api";
 
 let startState: TaskStateType
 
-beforeEach(() => {
+/*beforeEach(() => {
     startState = {
         "todolistId1": [
             { id: "1", title: "CSS", isDone: false },
@@ -17,7 +18,7 @@ beforeEach(() => {
             { id: "3", title: "tea", isDone: false }
         ]
     };
-})
+})*/
 
 test('correct task should be deleted from correct array', () => {
 
@@ -49,17 +50,17 @@ test('correct task should be added to correct array', () => {
     expect(endState["todolistId2"].length).toBe(4);
     expect(endState["todolistId2"][0].id).toBeDefined();
     expect(endState["todolistId2"][1].title).toBe("bread");
-    expect(endState["todolistId2"][1].isDone).toBe(false);
+    //expect(endState["todolistId2"][1].isDone).toBe(false);
     expect(endState["todolistId2"][0].title).toBe("juce");
 })
 
 test('status of specified task should be changed', () => {
 
-    const action = changeTaskStatusAC("2", false, "todolistId2");
+    const action = changeTaskStatusAC("2", TaskStatuses.New, "todolistId2");
 
     const endState = tasksReducer(startState, action)
 
-    expect(endState["todolistId2"][1].isDone).toBe(false);
+    //expect(endState["todolistId2"][1].isDone).toBe(false);
     expect(endState["todolistId1"].length).toBe(3);
     expect(endState["todolistId2"].length).toBe(3);
 });
@@ -93,7 +94,7 @@ test('new array should be added when new todolist is added', () => {
 
 test('ids should be equals', () => {
     const startTasksState: TaskStateType = {};
-    const startTodolistsState: Array<TodoListType> = [];
+    const startTodolistsState: Array<TodolistType> = [];
 
     const action = AddTodoListAC("new todolist");
 

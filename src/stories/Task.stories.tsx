@@ -4,7 +4,8 @@ import {Task} from "../components/Task";
 import {ReduxStoreProviderDecorator} from "./ReduxStoreProviderDecorator";
 import {useSelector} from "react-redux";
 import {AppRootStateType} from "../state/store";
-import {TaskType} from "../TodolistWithTasks";
+import {TaskAPIType} from "../api/task-api";
+
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -24,7 +25,7 @@ export default {
 } as ComponentMeta<typeof Task>;
 
 const TaskWithDispatch = () => {
-    const task = useSelector<AppRootStateType, TaskType>(state => state.tasks['todolistId2'][0])
+    const task = useSelector<AppRootStateType, TaskAPIType>(state => state.tasks['todolistId2'][0])
 
     return <Task
         task={task}
