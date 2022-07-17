@@ -1,5 +1,4 @@
 import {
-    ActionType,
     AddTodoListAC,
     ChangeTodoListFilterAC, ChangeTodoListTitleAC, FilterValuesType,
     RemoveTodoListAC,
@@ -12,15 +11,15 @@ let todolistId1: string
 let todolistId2: string
 let startState: Array<TodolistType>
 
-/*beforeEach(() => {
+beforeEach(() => {
     todolistId1 = v1();
     todolistId2 = v1();
 
     startState = [
-        {id: todolistId1, title: "What to learn", filter: "all"},
-        {id: todolistId2, title: "What to buy", filter: "all"}
+        {id: todolistId1, title: "What to learn", filter: "all", addedDate: '', order: 0},
+        {id: todolistId2, title: "What to buy", filter: "all", addedDate: '', order: 0}
     ]
-})*/
+})
 
 test('correct todolist should be removed', () => {
 
@@ -37,18 +36,12 @@ test('correct todolist should be added', () => {
     const endState = todolistsReducer(startState, AddTodoListAC(newTodolistTitle))
 
     expect(endState.length).toBe(3);
-    expect(endState[2].title).toBe(newTodolistTitle);
+    expect(endState[0].title).toBe(newTodolistTitle);
 });
 
 test('correct filter of todolist should be changed', () => {
 
     let newFilter: FilterValuesType = "completed";
-
-    const action : ActionType = {
-        type: 'CHANGE-TODOLIST-FILTER',
-        id: todolistId2,
-        value: newFilter
-    };
 
     const endState = todolistsReducer(startState, ChangeTodoListFilterAC(todolistId2, newFilter));
 
@@ -60,14 +53,8 @@ test('correct todolist should change its name', () => {
 
     let newTodolistTitle = "New Todolist";
 
-   const action : ActionType = {
-    type: 'CHANGE-TODOLIST-TITLE',
-    id: todolistId2,
-    title: newTodolistTitle
-};
+    const endState = todolistsReducer(startState, ChangeTodoListTitleAC(todolistId2, newTodolistTitle));
 
-const endState = todolistsReducer(startState, ChangeTodoListTitleAC(todolistId2, newTodolistTitle));
-
-expect(endState[0].title).toBe("What to learn");
-expect(endState[1].title).toBe(newTodolistTitle);
+    expect(endState[0].title).toBe("What to learn");
+    expect(endState[1].title).toBe(newTodolistTitle);
 });
