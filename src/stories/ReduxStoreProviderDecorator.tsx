@@ -7,6 +7,7 @@ import {v1} from 'uuid'
 import {AppRootStateType} from "../state/store";
 import {tasksReducer} from "../reducers/tasks-reducer";
 import {todolistsReducer} from "../reducers/todolists-reducer";
+import {TaskPriorities, TaskStatuses} from "../api/task-api";
 
 const rootReducer = combineReducers({
     tasks: tasksReducer,
@@ -14,26 +15,88 @@ const rootReducer = combineReducers({
 })
 
 const initialGlobalState = {
-   /* todolists: [
-        {id: 'todolistId1', title: 'What to learn', filter: 'all'},
-        {id: 'todolistId2', title: 'What to buy', filter: 'all'}
+    todolists: [
+        {id: 'todolistId1', title: "What to learn", filter: "all", addedDate: '', order: 0},
+        {id: 'todolistId2', title: "What to buy", filter: "all", addedDate: '', order: 0}
     ],
     tasks: {
         ['todolistId1']: [
-            {id: v1(), title: 'HTML&CSS', isDone: true},
-            {id: v1(), title: 'JS', isDone: true},
-            {id: v1(), title: 'React', isDone: false},
-            {id: v1(), title: 'Rest API', isDone: false},
-            {id: v1(), title: 'GraphQL', isDone: false},
+            {
+                id: v1(),
+                title: "CSS",
+                status: TaskStatuses.New,
+                description: '',
+                priority: TaskPriorities.Middle,
+                startDate: '',
+                deadline: '',
+                order: 0,
+                addedDate: '',
+                todoListId: "todolistId1"
+            },
+            {
+                id: v1(),
+                title: "JS",
+                status: TaskStatuses.New,
+                description: '',
+                priority: TaskPriorities.Middle,
+                startDate: '',
+                deadline: '',
+                order: 0,
+                addedDate: '',
+                todoListId: "todolistId1"
+            },
+            {
+                id: v1(),
+                title: "React",
+                status: TaskStatuses.New,
+                description: '',
+                priority: TaskPriorities.Middle,
+                startDate: '',
+                deadline: '',
+                order: 0,
+                addedDate: '',
+                todoListId: "todolistId1"
+            }
         ],
         ['todolistId2']: [
-            {id: v1(), title: 'Pork', isDone: true},
-            {id: v1(), title: 'Tomatoes', isDone: true},
-            {id: v1(), title: 'Сucumbers', isDone: false},
-            {id: v1(), title: 'Bread', isDone: false},
-            {id: v1(), title: 'Ketchup', isDone: false},
+            {
+                id: v1(),
+                title: "bread",
+                status: TaskStatuses.New,
+                description: '',
+                priority: TaskPriorities.Middle,
+                startDate: '',
+                deadline: '',
+                order: 0,
+                addedDate: '',
+                todoListId: "todolistId2"
+            },
+            {
+                id: v1(),
+                title: "milk",
+                status: TaskStatuses.New,
+                description: '',
+                priority: TaskPriorities.Middle,
+                startDate: '',
+                deadline: '',
+                order: 0,
+                addedDate: '',
+                todoListId: "todolistId2"
+            },
+            {
+                id: v1(),
+                title: "tea",
+                status: TaskStatuses.New,
+                description: '',
+                priority: TaskPriorities.Middle,
+                startDate: '',
+                deadline: '',
+                order: 0,
+                addedDate: '',
+                todoListId: "todolistId2"
+            }
         ]
-    }*/
+    }
 };
 
 export const storyBookStore = legacy_createStore(rootReducer, initialGlobalState as AppRootStateType);

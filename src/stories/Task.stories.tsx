@@ -5,6 +5,7 @@ import {ReduxStoreProviderDecorator} from "./ReduxStoreProviderDecorator";
 import {useSelector} from "react-redux";
 import {AppRootStateType} from "../state/store";
 import {TaskAPIType} from "../api/task-api";
+import {action} from "@storybook/addon-actions";
 
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
@@ -13,15 +14,15 @@ export default {
     component: Task,
     decorators: [ReduxStoreProviderDecorator],
     // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
-    /*args: {
+    args: {
         todolistID: '1',
         changeStatus: action('Status changed inside Task'),
         updateTask: action('Title changed inside Task'),
         removeTask: action('Remove button inside Task clicked'),
-    },*/
-    args:{
-        todolistID: 'todolistId2'
     },
+   /* args:{
+        todolistID: 'todolistId2'
+    },*/
 } as ComponentMeta<typeof Task>;
 
 const TaskWithDispatch = () => {
