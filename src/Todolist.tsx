@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import AddItemForm from "./components/AddItemForm";
 import EditableSpan from "./components/EditableSpan";
 import {Button, IconButton, List} from "@material-ui/core";
@@ -7,9 +7,9 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "./state/store";
 import {addTaskAC} from "./reducers/tasks-reducer";
 import {
-    ChangeTodoListFilterAC,
-    ChangeTodoListTitleAC,
-    RemoveTodoListAC,
+    changeTodoListFilterAC,
+    changeTodoListTitleAC, fetchTodolistsTC,
+    removeTodoListAC,
     TodolistType
 } from "./reducers/todolists-reducer";
 import {Task} from "./components/Task";
@@ -37,15 +37,19 @@ export const Todolist = React.memo(({todolist}: PropsType) => {
     }, [todolist.id])
 
     const removeTodoList = useCallback(() => {
-        dispatch(RemoveTodoListAC(todolist.id))
+        dispatch(removeTodoListAC(todolist.id))
     }, [todolist.id])
     const changeTodoListTitle = useCallback((title: string) => {
-        dispatch(ChangeTodoListTitleAC(todolist.id, title))
+        dispatch(changeTodoListTitleAC(todolist.id, title))
     }, [todolist.id])
 
-    const onAllClickHandler = useCallback(() => dispatch(ChangeTodoListFilterAC(todolist.id, "all")),[todolist.id])
-    const onActiveClickHandler = useCallback(() => dispatch(ChangeTodoListFilterAC(todolist.id, "active")),[todolist.id])
-    const onCompletedClickHandler = useCallback(() => dispatch(ChangeTodoListFilterAC(todolist.id, "completed")),[todolist.id])
+    const onAllClickHandler = useCallback(() => dispatch(changeTodoListFilterAC(todolist.id, "all")),[todolist.id])
+    const onActiveClickHandler = useCallback(() => dispatch(changeTodoListFilterAC(todolist.id, "active")),[todolist.id])
+    const onCompletedClickHandler = useCallback(() => dispatch(changeTodoListFilterAC(todolist.id, "completed")),[todolist.id])
+
+    useEffect(() => {
+        dispatch(fetchTodolistsTC())
+    })
 
     return <div>
         <h3>

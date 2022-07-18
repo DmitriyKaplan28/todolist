@@ -16,7 +16,7 @@ export const Task = React.memo((props: TasksType) => {
 
     const onClickHandler = useCallback(() => dispatch(removeTaskAC(props.task.id, props.todolistID)),[props.task.id, props.todolistID])
     const onChangeHandler = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-        let newIsDoneValue = event.currentTarget.checked ? TaskStatuses.Completed : TaskStatuses.New
+        let newIsDoneValue = event.currentTarget.checked ? TaskStatuses.Completed : TaskStatuses.InProgress
         dispatch(changeTaskStatusAC(props.task.id, newIsDoneValue, props.todolistID))
     },[props.task.id, props.todolistID])
     const changeTaskTitle = useCallback((title: string) => {
