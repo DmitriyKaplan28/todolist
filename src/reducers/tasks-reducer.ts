@@ -1,7 +1,7 @@
 import {TaskStateType} from "../App";
-import {v1} from "uuid";
 import {AddTodoListAT, RemoveTodoListAT, SetTodolistsAT, ThunkDispatch} from "./todolists-reducer";
-import {taskAPI, TaskAPIType, TaskPriorities, TaskStatuses} from "../api/task-api";
+import {taskAPI, TaskAPIType, TaskStatuses} from "../api/task-api";
+import {AppRootStateType} from "../state/store";
 
 type RemoveTaskAT = ReturnType<typeof removeTaskAC>
 type AddTaskAT = ReturnType<typeof addTaskAC>
@@ -25,20 +25,11 @@ export const tasksReducer = (state: TaskStateType = initialTasksState, action: T
         case 'REMOVE-TASK':
             return {...state, [action.todolistId]: state[action.todolistId].filter(t => t.id != action.taskId)}
         case 'ADD-TASK':
-            return {
-                ...state, [action.todolistId]: [{
-                    id: v1(),
-                    title: action.title,
-                    status: TaskStatuses.New,
-                    description: '',
-                    priority: TaskPriorities.Middle,
-                    startDate: '',
-                    deadline: '',
-                    order: 0,
-                    addedDate: '',
-                    todoListId: action.todolistId
-                }, ...state[action.todolistId]]
-            }
+            const stateCopy = {...state}
+            //const tasks = stateCopy[action.task.todoListId];
+            //const newTasks = [action.task, ...tasks];
+            stateCopy[action.task.todoListId] = [action.task, ...{...state}[action.task.todoListId]];
+            return stateCopy;
         case 'CHANGE-TASK-STATUS':
             return {
                 ...state,
@@ -80,12 +71,12 @@ export const removeTaskAC = (id: string, todolistId: string) => {
         taskId: id, todolistId
     } as const
 }
-export const addTaskAC = (title: string, todolistId: string) => {
-    return {
-        type: 'ADD-TASK',
-        title, todolistId
-    } as const
+
+export const addTaskAC = (task: TaskAPIType)=> {
+    return {type: 'ADD-TASK', task} as const
 }
+
+
 export const changeTaskStatusAC = (id: string, status: TaskStatuses, todolistId: string) => {
     return {
         type: 'CHANGE-TASK-STATUS',
@@ -120,5 +111,39 @@ export const removeTaskTC = (taskId: string, todolistId: string) => {
             .then(() => {
                 dispatch(removeTaskAC(taskId,todolistId))
             })
+    }
+}
+export const addTaskTC = (title: string, todolistId: string) => {
+    return (dispatch: ThunkDispatch) => {
+        taskAPI.createTask(todolistId,title)
+            .then((res) => {
+                dispatch(addTaskAC(res.data.data.item))
+            })
+    }
+}
+export const updateTaskStatusTC = (taskId: string, todolistId: string,status:TaskStatuses) => {
+    return (dispatch: ThunkDispatch, getState: () => AppRootStateType) => {
+
+// так как мы обязаны на сервер отправить все св-ва, которые сервер ожидает, а не только
+// те, которые мы хотим обновить, соответственно нам нужно в этом месте взять таску целиком  // чтобы у неё отобрать остальные св-ва
+
+        const allTasksFromState = getState().tasks;
+        const tasksForCurrentTodolist = allTasksFromState[todolistId]
+        const task = tasksForCurrentTodolist.find(t => {
+            return t.id === taskId
+        })
+        if (task) {
+            taskAPI.updateTask(todolistId, taskId, {
+                title: task.title,
+                description: task.description,
+                status: status,
+                priority: task.priority,
+                startDate: task.startDate,
+                deadline: task.deadline
+            })
+                .then(() => {
+                    dispatch(changeTaskStatusAC(taskId, status, todolistId))
+                })
+        }
     }
 }

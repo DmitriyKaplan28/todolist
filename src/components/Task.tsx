@@ -2,7 +2,7 @@ import React, {ChangeEvent, useCallback} from 'react';
 import {Checkbox, IconButton, ListItem} from "@material-ui/core";
 import EditableSpan from "./EditableSpan";
 import DeleteIcon from "@material-ui/icons/Delete";
-import {changeTaskStatusAC, changeTaskTitleAC, removeTaskTC} from "../reducers/tasks-reducer";
+import {changeTaskTitleAC, removeTaskTC, updateTaskStatusTC} from "../reducers/tasks-reducer";
 
 import {TaskAPIType, TaskStatuses} from "../api/task-api";
 import {useAppDispatch} from "../state/store";
@@ -18,7 +18,7 @@ export const Task = React.memo((props: TasksType) => {
     const onClickHandler = useCallback(() => dispatch(removeTaskTC(props.task.id, props.todolistID)),[props.task.id, props.todolistID])
     const onChangeHandler = useCallback((event: ChangeEvent<HTMLInputElement>) => {
         let newIsDoneValue = event.currentTarget.checked ? TaskStatuses.Completed : TaskStatuses.InProgress
-        dispatch(changeTaskStatusAC(props.task.id, newIsDoneValue, props.todolistID))
+        dispatch(updateTaskStatusTC(props.task.id,props.todolistID, newIsDoneValue ))
     },[props.task.id, props.todolistID])
     const changeTaskTitle = useCallback((title: string) => {
         dispatch(changeTaskTitleAC(props.task.id, title, props.todolistID))

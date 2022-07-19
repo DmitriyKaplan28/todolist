@@ -5,7 +5,7 @@ import {Button, IconButton, List} from "@material-ui/core";
 import DeleteIcon from '@material-ui/icons/Delete';
 import { useSelector} from "react-redux";
 import {AppRootStateType, useAppDispatch} from "./state/store";
-import {addTaskAC, fetchTasksTC} from "./reducers/tasks-reducer";
+import { addTaskTC, fetchTasksTC} from "./reducers/tasks-reducer";
 import {
     changeTodoListFilterAC,
     changeTodoListTitleAC,
@@ -33,7 +33,7 @@ export const Todolist = React.memo(({todolist}: PropsType) => {
     const dispatch = useAppDispatch();
 
     const addTask = useCallback((title: string) => {
-        dispatch(addTaskAC(title, todolist.id));
+        dispatch(addTaskTC(title, todolist.id));
     }, [todolist.id])
 
     const removeTodoList = useCallback(() => {
