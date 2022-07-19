@@ -3,12 +3,12 @@ import AddItemForm from "./components/AddItemForm";
 import EditableSpan from "./components/EditableSpan";
 import {Button, IconButton, List} from "@material-ui/core";
 import DeleteIcon from '@material-ui/icons/Delete';
-import {useDispatch, useSelector} from "react-redux";
-import {AppRootStateType} from "./state/store";
-import {addTaskAC} from "./reducers/tasks-reducer";
+import { useSelector} from "react-redux";
+import {AppRootStateType, useAppDispatch} from "./state/store";
+import {addTaskAC, fetchTasksTC} from "./reducers/tasks-reducer";
 import {
     changeTodoListFilterAC,
-    changeTodoListTitleAC, fetchTodolistsTC,
+    changeTodoListTitleAC,
     removeTodoListAC,
     TodolistType
 } from "./reducers/todolists-reducer";
@@ -30,7 +30,7 @@ export const Todolist = React.memo(({todolist}: PropsType) => {
     if (todolist.filter === "completed") {
         tasksForTodolist = tasks.filter(t => t.status === TaskStatuses.Completed);
     }
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch();
 
     const addTask = useCallback((title: string) => {
         dispatch(addTaskAC(title, todolist.id));
@@ -48,8 +48,8 @@ export const Todolist = React.memo(({todolist}: PropsType) => {
     const onCompletedClickHandler = useCallback(() => dispatch(changeTodoListFilterAC(todolist.id, "completed")),[todolist.id])
 
     useEffect(() => {
-        dispatch(fetchTodolistsTC())
-    })
+        dispatch(fetchTasksTC(todolist.id))
+    }, [])
 
     return <div>
         <h3>

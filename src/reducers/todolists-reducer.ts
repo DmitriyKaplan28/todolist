@@ -1,6 +1,7 @@
 import {v1} from "uuid";
 import {todolistAPI, TodolistAPIType} from "../api/todolist-api";
 import {Dispatch} from "redux";
+import {TasksActionsType} from "./tasks-reducer";
 
 export type FilterValuesType = "all" | "active" | "completed";
 export type TodolistType = TodolistAPIType & {
@@ -10,18 +11,18 @@ export type TodolistType = TodolistAPIType & {
 export type RemoveTodoListAT = ReturnType<typeof removeTodoListAC>
 export type AddTodoListAT = ReturnType<typeof addTodoListAC>
 export type SetTodolistsAT = ReturnType<typeof setTodolistsAC>
-export type ActionType = RemoveTodoListAT
+export type TodolistActionsType = RemoveTodoListAT
     | AddTodoListAT
     | SetTodolistsAT
     | ReturnType<typeof changeTodoListFilterAC>
     | ReturnType<typeof changeTodoListTitleAC>
     | ReturnType<typeof setTodolistsAC>
 
-type ThunkDispatch = Dispatch<ActionType>
+export type ThunkDispatch = Dispatch<TodolistActionsType | TasksActionsType>
 
 const initialTodolistsState: Array<TodolistType> = []
 
-export const todolistsReducer = (todolists: Array<TodolistType> = initialTodolistsState, action: ActionType): Array<TodolistType> => {
+export const todolistsReducer = (todolists: Array<TodolistType> = initialTodolistsState, action: TodolistActionsType): Array<TodolistType> => {
     switch (action.type) {
         case "REMOVE-TODOLIST":
             return todolists.filter(tl => tl.id !== action.id)

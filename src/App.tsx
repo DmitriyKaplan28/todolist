@@ -6,14 +6,14 @@ import {Menu} from "@material-ui/icons";
 import {
     addTodoListAC,
     fetchTodolistsTC,
-    setTodolistsAC,
+
     TodolistType,
 } from "./reducers/todolists-reducer";
-import {AppRootStateType} from "./state/store";
-import {useDispatch, useSelector} from "react-redux";
+import {AppRootStateType, useAppDispatch} from "./state/store";
+import {useSelector} from "react-redux";
 import {Todolist} from "./Todolist";
 import {TaskAPIType} from "./api/task-api";
-import {todolistAPI} from "./api/todolist-api";
+
 
 export type TaskStateType = {
     [todoListID: string]: TaskAPIType[]
@@ -22,13 +22,15 @@ export type TaskStateType = {
 function App() {
 
     const todoLists = useSelector<AppRootStateType, Array<TodolistType>>(state => state.todolists)
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const addTodoList = useCallback((title: string) => {
         dispatch(addTodoListAC(title))
     }, [])
 
-
+    useEffect(() => {
+        dispatch(fetchTodolistsTC())
+    }, [])
 
     return (
         <div className="App">
