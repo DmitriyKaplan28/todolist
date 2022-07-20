@@ -2,7 +2,7 @@ import React, {ChangeEvent, useCallback} from 'react';
 import {Checkbox, IconButton, ListItem} from "@material-ui/core";
 import EditableSpan from "./EditableSpan";
 import DeleteIcon from "@material-ui/icons/Delete";
-import {changeTaskTitleAC, removeTaskTC, updateTaskStatusTC} from "../reducers/tasks-reducer";
+import {removeTaskTC, updateTaskStatusTC, updateTaskTitleTC} from "../reducers/tasks-reducer";
 
 import {TaskAPIType, TaskStatuses} from "../api/task-api";
 import {useAppDispatch} from "../state/store";
@@ -21,7 +21,7 @@ export const Task = React.memo((props: TasksType) => {
         dispatch(updateTaskStatusTC(props.task.id,props.todolistID, newIsDoneValue ))
     },[props.task.id, props.todolistID])
     const changeTaskTitle = useCallback((title: string) => {
-        dispatch(changeTaskTitleAC(props.task.id, title, props.todolistID))
+        dispatch(updateTaskTitleTC(props.task.id, props.todolistID, title))
     },[props.task.id, props.todolistID])
 
     return (

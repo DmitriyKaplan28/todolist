@@ -71,12 +71,9 @@ export const removeTaskAC = (id: string, todolistId: string) => {
         taskId: id, todolistId
     } as const
 }
-
 export const addTaskAC = (task: TaskAPIType)=> {
     return {type: 'ADD-TASK', task} as const
 }
-
-
 export const changeTaskStatusAC = (id: string, status: TaskStatuses, todolistId: string) => {
     return {
         type: 'CHANGE-TASK-STATUS',
@@ -123,13 +120,7 @@ export const addTaskTC = (title: string, todolistId: string) => {
 }
 export const updateTaskStatusTC = (taskId: string, todolistId: string,status:TaskStatuses) => {
     return (dispatch: ThunkDispatch, getState: () => AppRootStateType) => {
-
-// так как мы обязаны на сервер отправить все св-ва, которые сервер ожидает, а не только
-// те, которые мы хотим обновить, соответственно нам нужно в этом месте взять таску целиком  // чтобы у неё отобрать остальные св-ва
-
-        const allTasksFromState = getState().tasks;
-        const tasksForCurrentTodolist = allTasksFromState[todolistId]
-        const task = tasksForCurrentTodolist.find(t => {
+        const task = getState().tasks[todolistId].find(t => {
             return t.id === taskId
         })
         if (task) {
@@ -143,6 +134,27 @@ export const updateTaskStatusTC = (taskId: string, todolistId: string,status:Tas
             })
                 .then(() => {
                     dispatch(changeTaskStatusAC(taskId, status, todolistId))
+                })
+        }
+    }
+}
+
+export const updateTaskTitleTC = (taskId: string, todolistId: string, title: string) => {
+    return (dispatch: ThunkDispatch, getState: () => AppRootStateType) => {
+        const task = getState().tasks[todolistId].find(t => {
+            return t.id === taskId
+        })
+        if (task) {
+            taskAPI.updateTask(todolistId, taskId, {
+                title: title,
+                description: task.description,
+                status: task.status,
+                priority: task.priority,
+                startDate: task.startDate,
+                deadline: task.deadline
+            })
+                .then(() => {
+                    dispatch(changeTaskTitleAC(taskId, title, todolistId))
                 })
         }
     }

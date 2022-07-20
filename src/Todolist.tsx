@@ -6,11 +6,9 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import { useSelector} from "react-redux";
 import {AppRootStateType, useAppDispatch} from "./state/store";
 import { addTaskTC, fetchTasksTC} from "./reducers/tasks-reducer";
-import {
-    changeTodoListFilterAC,
-    changeTodoListTitleAC,
-    removeTodoListAC,
-    TodolistType
+import {changeTodolistFilterAC,
+    removeTodolistTC,
+    TodolistType, updateTodolistTitleTC
 } from "./reducers/todolists-reducer";
 import {Task} from "./components/Task";
 import {TaskAPIType, TaskStatuses} from "./api/task-api";
@@ -37,15 +35,15 @@ export const Todolist = React.memo(({todolist}: PropsType) => {
     }, [todolist.id])
 
     const removeTodoList = useCallback(() => {
-        dispatch(removeTodoListAC(todolist.id))
+        dispatch(removeTodolistTC(todolist.id))
     }, [todolist.id])
     const changeTodoListTitle = useCallback((title: string) => {
-        dispatch(changeTodoListTitleAC(todolist.id, title))
+        dispatch(updateTodolistTitleTC(todolist.id, title))
     }, [todolist.id])
 
-    const onAllClickHandler = useCallback(() => dispatch(changeTodoListFilterAC(todolist.id, "all")),[todolist.id])
-    const onActiveClickHandler = useCallback(() => dispatch(changeTodoListFilterAC(todolist.id, "active")),[todolist.id])
-    const onCompletedClickHandler = useCallback(() => dispatch(changeTodoListFilterAC(todolist.id, "completed")),[todolist.id])
+    const onAllClickHandler = useCallback(() => dispatch(changeTodolistFilterAC(todolist.id, "all")),[todolist.id])
+    const onActiveClickHandler = useCallback(() => dispatch(changeTodolistFilterAC(todolist.id, "active")),[todolist.id])
+    const onCompletedClickHandler = useCallback(() => dispatch(changeTodolistFilterAC(todolist.id, "completed")),[todolist.id])
 
     useEffect(() => {
         dispatch(fetchTasksTC(todolist.id))

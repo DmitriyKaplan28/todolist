@@ -3,10 +3,8 @@ import './App.css';
 import AddItemForm from "./components/AddItemForm";
 import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@material-ui/core";
 import {Menu} from "@material-ui/icons";
-import {
-    addTodoListAC,
+import {addTodolistTC,
     fetchTodolistsTC,
-
     TodolistType,
 } from "./reducers/todolists-reducer";
 import {AppRootStateType, useAppDispatch} from "./state/store";
@@ -25,7 +23,7 @@ function App() {
     const dispatch = useAppDispatch();
 
     const addTodoList = useCallback((title: string) => {
-        dispatch(addTodoListAC(title))
+        dispatch(addTodolistTC(title))
     }, [])
 
     useEffect(() => {
