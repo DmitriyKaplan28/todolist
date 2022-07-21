@@ -2,6 +2,7 @@ import {TaskStateType} from "../App";
 import {AddTodoListAT, RemoveTodoListAT, SetTodolistsAT, ThunkDispatch} from "./todolists-reducer";
 import {taskAPI, TaskAPIType, TaskStatuses} from "../api/task-api";
 import {AppRootStateType} from "../state/store";
+import {setAppStatusAC} from "./app-reducer";
 
 type RemoveTaskAT = ReturnType<typeof removeTaskAC>
 type AddTaskAT = ReturnType<typeof addTaskAC>
@@ -98,7 +99,8 @@ export const fetchTasksTC = (todolistId: string) => {
         taskAPI.getTasks(todolistId)
             .then((res) => {
                 const tasks = res.data.items
-                dispatch(setTasksAC(tasks, todolistId))
+                dispatch(setTasksAC(tasks, todolistId));
+                dispatch(setAppStatusAC('succeeded'))
             })
     }
 }
@@ -106,7 +108,8 @@ export const removeTaskTC = (taskId: string, todolistId: string) => {
     return (dispatch: ThunkDispatch) => {
         taskAPI.deleteTask(todolistId,taskId)
             .then(() => {
-                dispatch(removeTaskAC(taskId,todolistId))
+                dispatch(removeTaskAC(taskId,todolistId));
+                dispatch(setAppStatusAC('succeeded'))
             })
     }
 }
@@ -114,7 +117,8 @@ export const addTaskTC = (title: string, todolistId: string) => {
     return (dispatch: ThunkDispatch) => {
         taskAPI.createTask(todolistId,title)
             .then((res) => {
-                dispatch(addTaskAC(res.data.data.item))
+                dispatch(addTaskAC(res.data.data.item));
+                dispatch(setAppStatusAC('succeeded'))
             })
     }
 }

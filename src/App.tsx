@@ -1,9 +1,20 @@
 import React, {useCallback, useEffect} from 'react';
 import './App.css';
 import AddItemForm from "./components/AddItemForm";
-import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@material-ui/core";
+import {
+    AppBar,
+    Button,
+    Container,
+    Grid,
+    IconButton,
+    LinearProgress,
+    Paper,
+    Toolbar,
+    Typography
+} from "@material-ui/core";
 import {Menu} from "@material-ui/icons";
-import {addTodolistTC,
+import {
+    addTodolistTC,
     fetchTodolistsTC,
     TodolistType,
 } from "./reducers/todolists-reducer";
@@ -11,6 +22,7 @@ import {AppRootStateType, useAppDispatch} from "./state/store";
 import {useSelector} from "react-redux";
 import {Todolist} from "./Todolist";
 import {TaskAPIType} from "./api/task-api";
+import {RequestStatusType} from "./reducers/app-reducer";
 
 
 export type TaskStateType = {
@@ -20,6 +32,7 @@ export type TaskStateType = {
 function App() {
 
     const todoLists = useSelector<AppRootStateType, Array<TodolistType>>(state => state.todolists)
+    const status = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
     const dispatch = useAppDispatch();
 
     const addTodoList = useCallback((title: string) => {
@@ -33,6 +46,7 @@ function App() {
     return (
         <div className="App">
             <AppBar position="static">
+                {status === 'loading' && <LinearProgress color={'secondary'}/>}
                 <Toolbar style={{justifyContent: "space-between"}}>
                     <IconButton edge="start" color="inherit" aria-label="menu">
                         <Menu/>

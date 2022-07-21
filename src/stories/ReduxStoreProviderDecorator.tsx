@@ -3,7 +3,7 @@ import {Provider} from 'react-redux';
 import React from 'react'
 import {combineReducers, legacy_createStore} from 'redux'
 import {v1} from 'uuid'
-;
+    ;
 import {AppRootStateType} from "../state/store";
 import {tasksReducer} from "../reducers/tasks-reducer";
 import {todolistsReducer} from "../reducers/todolists-reducer";
@@ -96,6 +96,9 @@ const initialGlobalState = {
                 todoListId: "todolistId2"
             }
         ]
+    },
+    app: {
+        status: 'idle'
     }
 };
 
