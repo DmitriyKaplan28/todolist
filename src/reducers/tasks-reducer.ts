@@ -142,7 +142,6 @@ export const updateTaskStatusTC = (taskId: string, todolistId: string,status:Tas
         }
     }
 }
-
 export const updateTaskTitleTC = (taskId: string, todolistId: string, title: string) => {
     return (dispatch: ThunkDispatch, getState: () => AppRootStateType) => {
         const task = getState().tasks[todolistId].find(t => {
