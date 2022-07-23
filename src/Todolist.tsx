@@ -28,6 +28,7 @@ export const Todolist = React.memo(({todolist}: PropsType) => {
     if (todolist.filter === "completed") {
         tasksForTodolist = tasks.filter(t => t.status === TaskStatuses.Completed);
     }
+
     const dispatch = useAppDispatch();
 
     const addTask = useCallback((title: string) => {

@@ -20,9 +20,6 @@ export default {
         updateTask: action('Title changed inside Task'),
         removeTask: action('Remove button inside Task clicked'),
     },
-   /* args:{
-        todolistID: 'todolistId2'
-    },*/
 } as ComponentMeta<typeof Task>;
 
 const TaskWithDispatch = () => {
