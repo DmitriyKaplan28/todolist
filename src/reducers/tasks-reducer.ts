@@ -1,8 +1,9 @@
 import {TaskStateType} from "../App";
 import {AddTodoListAT, RemoveTodoListAT, SetTodolistsAT, ThunkDispatch} from "./todolists-reducer";
-import {taskAPI, TaskAPIType, TaskStatuses} from "../api/task-api";
+import {taskAPI, TaskAPIType, TaskStatuses, UpdateTaskType} from "../api/task-api";
 import {AppRootStateType} from "../state/store";
 import {setAppStatusAC} from "./app-reducer";
+import {AxiosError} from "axios";
 
 type RemoveTaskAT = ReturnType<typeof removeTaskAC>
 type AddTaskAT = ReturnType<typeof addTaskAC>
@@ -162,3 +163,46 @@ export const updateTaskTitleTC = (taskId: string, todolistId: string, title: str
         }
     }
 }
+
+export const updateTaskTC = (taskId: string, domainModel: UpdateTaskType, todolistId: string) =>
+    (dispatch:ThunkDispatch, getState: () => AppRootStateType) => {
+        dispatch(setAppStatusAC('loading'))
+        const state = getState()
+        const task = state.tasks[todolistId].find(t => t.id === taskId)
+        if (!task) {
+            //throw new Error("task not found in the state");
+            console.warn('task not found in the state')
+            return
+        }
+
+        const apiModel: UpdateTaskType = {
+            deadline: task.deadline,
+            description: task.description,
+            priority: task.priority,
+            startDate: task.startDate,
+            title: task.title,
+            status: task.status,
+            ...domainModel
+        }
+
+        taskAPI.updateTask(todolistId, taskId, apiModel)
+            .then(res => {
+                if (res.data.resultCode === 0) {
+                    const action = updateTaskAC(taskId, domainModel, todolistId)
+                    dispatch(action)
+                    dispatch(setAppStatusAC('succeeded'))
+                } else {
+                    if (res.data.messages.length) {
+                        dispatch(setAppErrorAc(res.data.messages[0]))
+                    } else {
+                        dispatch(setAppErrorAc('Some error'))
+                    }
+                    dispatch(setAppStatusAC('failed'))
+                }
+            })
+            .catch((err: AxiosError) => {
+                //handleServerNetworkError(err.message, dispatch)
+                // dispatch(setAppErrorAc(err.message))
+                // dispatch(setAppStatusAc('failed'))
+            })
+    }

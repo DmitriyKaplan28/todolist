@@ -39,7 +39,7 @@ type ResponseTasksType = {
 export type UpdateTaskType = {
     title: string
     description: string
-    status: number
+    status: TaskStatuses
     priority: number
     startDate: string | null
     deadline: string | null
@@ -63,7 +63,7 @@ export const taskAPI = {
     deleteTask(todolistId: string, taskId: string) {
         return instance.delete<ResponseType>(`${todolistId}/tasks/${taskId}`)
     },
-    updateTask(todolistId: string, taskId: string, updatedTask: UpdateTaskType) {
-        return instance.put<ResponseType<TaskAPIType>>(`${todolistId}/tasks/${taskId}`, updatedTask)
+    updateTask(todolistId: string, taskId: string, model: UpdateTaskType) {
+        return instance.put<UpdateTaskType, AxiosResponse<ResponseType<{ item: TaskAPIType }>>>(`todo-lists/${todolistId}/tasks/${taskId}`, model);
     }
 }
