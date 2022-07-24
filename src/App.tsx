@@ -21,13 +21,7 @@ import {
 import {AppRootStateType, useAppDispatch} from "./state/store";
 import {useSelector} from "react-redux";
 import {Todolist} from "./Todolist";
-import {TaskAPIType} from "./api/task-api";
 import {RequestStatusType} from "./reducers/app-reducer";
-
-
-export type TaskStateType = {
-    [todoListID: string]: TaskAPIType[]
-}
 
 function App() {
 
