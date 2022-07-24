@@ -45,8 +45,8 @@ export const UpdateTask = () => {
         description:"AZAZA is just like AHAHA",
         status: 0,
         priority: 1,
-        startDate: null,
-        deadline: null,
+        startDate: '',
+        deadline: '',
     }
     useEffect(() => {
         taskAPI.updateTask('66f64bf1-3514-45df-b008-6659e252bfdd', '6ab79400-e8d9-4f87-81af-23ea55e2a96c', updatedTask)
