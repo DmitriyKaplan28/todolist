@@ -4,9 +4,9 @@ import React from 'react'
 import {combineReducers, legacy_createStore} from 'redux'
 import {v1} from 'uuid'
     ;
-import {AppRootStateType} from "../state/store";
-import {tasksReducer} from "../reducers/tasks-reducer";
-import {todolistsReducer} from "../reducers/todolists-reducer";
+import {AppRootStateType} from "./store";
+import {tasksReducer} from "./reducers/tasks-reducer";
+import {todolistsReducer} from "./reducers/todolists-reducer";
 import {TaskPriorities, TaskStatuses} from "../api/task-api";
 
 const rootReducer = combineReducers({

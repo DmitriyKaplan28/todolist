@@ -1,11 +1,11 @@
 import React, {ChangeEvent, useCallback} from 'react';
 import {Checkbox, IconButton, ListItem} from "@material-ui/core";
-import EditableSpan from "./EditableSpan";
+import EditableSpan from "../EditableSpan/EditableSpan";
 import DeleteIcon from "@material-ui/icons/Delete";
-import {removeTaskTC, updateTaskTC} from "../reducers/tasks-reducer";
+import {removeTaskTC, updateTaskTC} from "../../state/reducers/tasks-reducer";
 
-import {TaskAPIType, TaskStatuses} from "../api/task-api";
-import {useAppDispatch} from "../state/store";
+import {TaskAPIType, TaskStatuses} from "../../api/task-api";
+import {useAppDispatch} from "../../state/store";
 
 type TasksType = {
     task: TaskAPIType,

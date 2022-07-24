@@ -1,6 +1,6 @@
 import {AddTodoListAT, RemoveTodoListAT, SetTodolistsAT} from "./todolists-reducer";
-import {taskAPI, TaskAPIType, UpdateDomainTaskModelType, UpdateTaskType} from "../api/task-api";
-import {AppRootStateType, ThunkDispatchType} from "../state/store";
+import {taskAPI, TaskAPIType, UpdateDomainTaskModelType, UpdateTaskType} from "../../api/task-api";
+import {AppRootStateType, ThunkDispatchType} from "../store";
 import {setAppStatusAC} from "./app-reducer";
 import {AxiosError} from "axios";
 

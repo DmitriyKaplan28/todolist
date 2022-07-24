@@ -1,7 +1,7 @@
 import {v1} from "uuid";
-import {todolistAPI, TodolistAPIType} from "../api/todolist-api";
+import {todolistAPI, TodolistAPIType} from "../../api/todolist-api";
 import {setAppStatusAC} from "./app-reducer";
-import {ThunkDispatchType} from "../state/store";
+import {ThunkDispatchType} from "../store";
 
 const initialTodolistsState: Array<TodolistType> = []
 

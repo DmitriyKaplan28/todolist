@@ -1,32 +1,30 @@
 import React, {useCallback, useEffect} from 'react';
-import AddItemForm from "./components/AddItemForm";
-import EditableSpan from "./components/EditableSpan";
+import AddItemForm from "../AddItemForm/AddItemForm";
+import EditableSpan from "../EditableSpan/EditableSpan";
 import {Button, IconButton, List} from "@material-ui/core";
 import DeleteIcon from '@material-ui/icons/Delete';
 import { useSelector} from "react-redux";
-import {AppRootStateType, useAppDispatch} from "./state/store";
-import { addTaskTC, fetchTasksTC} from "./reducers/tasks-reducer";
+import {AppRootStateType, useAppDispatch} from "../../state/store";
+import { addTaskTC, fetchTasksTC} from "../../state/reducers/tasks-reducer";
 import {changeTodolistFilterAC,
     removeTodolistTC,
     TodolistType, updateTodolistTitleTC
-} from "./reducers/todolists-reducer";
-import {Task} from "./components/Task";
-import {TaskAPIType, TaskStatuses} from "./api/task-api";
+} from "../../state/reducers/todolists-reducer";
+import {Task} from "../Task/Task";
+import {TaskAPIType, TaskStatuses} from "../../api/task-api";
 
 type PropsType = {
     todolist: TodolistType
 }
 
 export const Todolist = React.memo(({todolist}: PropsType) => {
-    let tasks = useSelector<AppRootStateType, Array<TaskAPIType>>(state => state.tasks[todolist.id])
-
-    let tasksForTodolist = tasks
+    let tasksForTodolist = useSelector<AppRootStateType, Array<TaskAPIType>>(state => state.tasks[todolist.id])
 
     if (todolist.filter === "active") {
-        tasksForTodolist = tasks.filter(t => t.status === TaskStatuses.New || t.status === TaskStatuses.InProgress);
+        tasksForTodolist = tasksForTodolist.filter(t => t.status === TaskStatuses.New || t.status === TaskStatuses.InProgress);
     }
     if (todolist.filter === "completed") {
-        tasksForTodolist = tasks.filter(t => t.status === TaskStatuses.Completed);
+        tasksForTodolist = tasksForTodolist.filter(t => t.status === TaskStatuses.Completed);
     }
 
     const dispatch = useAppDispatch();
