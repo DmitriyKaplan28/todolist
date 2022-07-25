@@ -1,27 +1,19 @@
-import axios, {AxiosResponse} from 'axios'
-import {ResponseType} from "./todolist-api";
-
-const instance = axios.create({
-    baseURL: 'https://social-network.samuraijs.com/api/1.1/todo-lists/',
-    withCredentials: true,
-    headers: {
-        'API-KEY': '3d16c705-9d76-4149-af9f-e3f3ed45edd2'
-    }
-})
+import {AxiosResponse} from 'axios'
+import {instance, ResponseType} from "./todolist-api";
 
 //api
 export const taskAPI = {
     getTasks(todolistId: string) {
-        return instance.get<ResponseTasksType>(`${todolistId}/tasks`)
+        return instance.get<ResponseTasksType>(`todo-lists/${todolistId}/tasks`)
     },
     createTask(todolistId: string, title: string) {
-        return instance.post<{ title: string }, AxiosResponse<ResponseType<{ item: TaskAPIType }>>>(`${todolistId}/tasks`, {title: title})
+        return instance.post<{ title: string }, AxiosResponse<ResponseType<{ item: TaskAPIType }>>>(`todo-lists/${todolistId}/tasks`, {title: title})
     },
     deleteTask(todolistId: string, taskId: string) {
-        return instance.delete<ResponseType>(`${todolistId}/tasks/${taskId}`)
+        return instance.delete<ResponseType>(`todo-lists/${todolistId}/tasks/${taskId}`)
     },
     updateTask(todolistId: string, taskId: string, model: UpdateDomainTaskModelType) {
-        return instance.put<UpdateDomainTaskModelType, AxiosResponse<ResponseType<{ item: TaskAPIType }>>>(`${todolistId}/tasks/${taskId}`, model);
+        return instance.put<UpdateDomainTaskModelType, AxiosResponse<ResponseType<{ item: TaskAPIType }>>>(`todo-lists/${todolistId}/tasks/${taskId}`, model);
     }
 }
 
