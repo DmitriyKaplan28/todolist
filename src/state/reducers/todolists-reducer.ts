@@ -8,8 +8,6 @@ export const todolistsReducer = (todolists: Array<TodolistType> = initialTodolis
     switch (action.type) {
         case "REMOVE-TODOLIST":
             return todolists.filter(tl => tl.id !== action.id)
-        // case 'ADD-TODOLIST':
-        //     return [{id: action.todolistId, title: action.title, filter: "all", addedDate: '', order: 0}, ...todolists]
         case 'ADD-TODOLIST':
             return [{...action.todolist, filter: 'all'}, ...todolists]
         case "CHANGE-TODOLIST-FILTER":
@@ -26,8 +24,6 @@ export const todolistsReducer = (todolists: Array<TodolistType> = initialTodolis
 //actions
 export const removeTodolistAC = (id: string) =>
     ({type: 'REMOVE-TODOLIST', id} as const)
-// export const addTodolistAC = (title: string) =>
-//     ({type: 'ADD-TODOLIST', title, todolistId: v1()} as const)
 export const addTodolistAC = (todolist: TodolistAPIType) => ({type: 'ADD-TODOLIST', todolist} as const)
 export const changeTodolistFilterAC = (id: string, value: FilterValuesType) =>
     ({type: 'CHANGE-TODOLIST-FILTER', id, value} as const)
