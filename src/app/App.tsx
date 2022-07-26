@@ -14,6 +14,7 @@ import {AppRootStateType} from "../state/store";
 import {useSelector} from "react-redux";
 import {RequestStatusType} from "../state/reducers/app-reducer";
 import {TodolistsList} from "../features/TodolistsList/TodolistsList";
+import {ErrorSnackbar} from "../components/ErrorSnackbar/ErrorSnackbar";
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
 
     return (
         <div className="App">
+            <ErrorSnackbar/>
             <AppBar position="static">
                 {status === 'loading' && <LinearProgress color={'secondary'}/>}
                 <Toolbar style={{justifyContent: "space-between"}}>

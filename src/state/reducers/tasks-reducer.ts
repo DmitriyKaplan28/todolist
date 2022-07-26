@@ -1,7 +1,7 @@
 import {AddTodoListAT, RemoveTodoListAT, SetTodolistsAT} from "./todolists-reducer";
 import {taskAPI, TaskAPIType, UpdateDomainTaskModelType, UpdateTaskType} from "../../api/task-api";
 import {AppRootStateType, ThunkDispatchType} from "../store";
-import {setAppStatusAC} from "./app-reducer";
+import {setAppErrorAC, setAppStatusAC} from "./app-reducer";
 import {AxiosError} from "axios";
 
 const initialTasksState: TaskStateType = {}
@@ -69,10 +69,20 @@ export const removeTaskTC = (taskId: string, todolistId: string) => (dispatch: T
 export const addTaskTC = (title: string, todolistId: string) => (dispatch: ThunkDispatchType) => {
     dispatch(setAppStatusAC('loading'))
     taskAPI.createTask(todolistId, title)
-        .then((res) => {
-            dispatch(addTaskAC(res.data.data.item));
-            dispatch(setAppStatusAC('succeeded'))
+        .then(res => {
+            if (res.data.resultCode === 0) {
+                dispatch(addTaskAC(res.data.data.item))
+                dispatch(setAppStatusAC('succeeded'))
+            } else {
+                if (res.data.messages.length) {
+                    dispatch(setAppErrorAC(res.data.messages[0]))
+                } else {
+                    dispatch(setAppErrorAC('Some error occurred'))
+                }
+                dispatch(setAppStatusAC('failed'))
+            }
         })
+
 }
 export const updateTaskTC = (taskId: string, domainModel: UpdateDomainTaskModelType, todolistId: string) =>
     (dispatch: ThunkDispatchType, getState: () => AppRootStateType) => {
