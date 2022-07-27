@@ -1,5 +1,6 @@
 import {AxiosResponse} from 'axios'
 import {instance, ResponseType} from "./todolist-api";
+import {RequestStatusType} from "../state/reducers/app-reducer";
 
 //api
 export const taskAPI = {
@@ -29,6 +30,7 @@ export type TaskAPIType = {
     todoListId: string
     order: number
     addedDate: string
+    entityStatus: RequestStatusType
 }
 export enum TaskStatuses {
     New = 0,

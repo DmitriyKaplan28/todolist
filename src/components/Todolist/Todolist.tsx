@@ -62,7 +62,7 @@ export const Todolist = React.memo(({todolist}: PropsType) => {
                 <DeleteIcon/>
             </IconButton>
         </h3>
-        <AddItemForm addItem={addTask}/>
+        <AddItemForm addItem={addTask} disabled={todolist.entityStatus === 'loading'}/>
         <List>
             {tasksForTodolist.map(t => <Task task={t}
                                   todolistID={todolist.id}/>)}

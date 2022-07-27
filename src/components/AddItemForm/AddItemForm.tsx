@@ -5,6 +5,7 @@ import {IconButton, TextField} from "@material-ui/core";
 
 export type AddItemFormPropsType = {
     addItem: (title: string) => void
+    disabled?: boolean
 }
 
 const AddItemForm = React.memo((props: AddItemFormPropsType) => {
@@ -42,9 +43,9 @@ const AddItemForm = React.memo((props: AddItemFormPropsType) => {
                     variant={"outlined"}
                     value={title}
                     onChange={onChangeHandler}
-                    onKeyPress={onKeyPressAddItem}
+                    onKeyDown={onKeyPressAddItem}
                 />
-                <IconButton onClick={onClickAddItem}>
+                <IconButton onClick={onClickAddItem} disabled={props.disabled}>
                     <PostAddIcon/>
                 </IconButton>
                 {/*<button onClick={onClickAddItem}>+</button>*/}
