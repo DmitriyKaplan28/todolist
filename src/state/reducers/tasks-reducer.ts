@@ -50,7 +50,9 @@ export const updateTaskAC = (taskId: string, model: UpdateDomainTaskModelType, t
 
 //thunks
 export const fetchTasksTC = (todolistId: string) => (dispatch: ThunkDispatchType) => {
+
     dispatch(setAppStatusAC('loading'))
+
     taskAPI.getTasks(todolistId)
         .then((res) => {
             const tasks = res.data.items
@@ -59,7 +61,9 @@ export const fetchTasksTC = (todolistId: string) => (dispatch: ThunkDispatchType
         })
 }
 export const removeTaskTC = (taskId: string, todolistId: string) => (dispatch: ThunkDispatchType) => {
+
     dispatch(setAppStatusAC('loading'))
+
     taskAPI.deleteTask(todolistId, taskId)
         .then(() => {
             dispatch(removeTaskAC(taskId, todolistId));
@@ -67,7 +71,9 @@ export const removeTaskTC = (taskId: string, todolistId: string) => (dispatch: T
         })
 }
 export const addTaskTC = (title: string, todolistId: string) => (dispatch: ThunkDispatchType) => {
+
     dispatch(setAppStatusAC('loading'))
+
     taskAPI.createTask(todolistId, title)
         .then(res => {
             if (res.data.resultCode === 0) {
@@ -86,13 +92,17 @@ export const addTaskTC = (title: string, todolistId: string) => (dispatch: Thunk
 }
 export const updateTaskTC = (taskId: string, domainModel: UpdateDomainTaskModelType, todolistId: string) =>
     (dispatch: ThunkDispatchType, getState: () => AppRootStateType) => {
+
         dispatch(setAppStatusAC('loading'))
+
         const state = getState()
         const task = state.tasks[todolistId].find(t => t.id === taskId)
+
         if (!task) {
             console.warn('task not found in the state')
             return
         }
+
         const apiModel: UpdateTaskType = {
             deadline: task.deadline,
             description: task.description,
@@ -102,6 +112,7 @@ export const updateTaskTC = (taskId: string, domainModel: UpdateDomainTaskModelT
             status: task.status,
             ...domainModel
         }
+
         taskAPI.updateTask(todolistId, taskId, apiModel)
             .then(res => {
                 if (res.data.resultCode === 0) {

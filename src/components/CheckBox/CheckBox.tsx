@@ -1,5 +1,4 @@
 import React, {ChangeEvent} from 'react';
-import CheckBoxIcon from '@material-ui/icons/CheckBox';
 
 type PropsType={
     isDone:boolean
