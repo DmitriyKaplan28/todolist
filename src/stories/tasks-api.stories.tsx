@@ -47,6 +47,7 @@ export const UpdateTask = () => {
         priority: 1,
         startDate: '',
         deadline: '',
+        entityStatus: "idle"
     }
     useEffect(() => {
         taskAPI.updateTask('66f64bf1-3514-45df-b008-6659e252bfdd', '6ab79400-e8d9-4f87-81af-23ea55e2a96c', updatedTask)

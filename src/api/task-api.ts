@@ -1,6 +1,7 @@
 import {AxiosResponse} from 'axios'
 import {instance, ResponseType} from "./todolist-api";
 import {RequestStatusType} from "../state/reducers/app-reducer";
+import {TaskType} from "../state/reducers/tasks-reducer";
 
 //api
 export const taskAPI = {
@@ -8,13 +9,13 @@ export const taskAPI = {
         return instance.get<ResponseTasksType>(`todo-lists/${todolistId}/tasks`)
     },
     createTask(todolistId: string, title: string) {
-        return instance.post<{ title: string }, AxiosResponse<ResponseType<{ item: TaskAPIType }>>>(`todo-lists/${todolistId}/tasks`, {title: title})
+        return instance.post<{ title: string }, AxiosResponse<ResponseType<{ item: TaskType }>>>(`todo-lists/${todolistId}/tasks`, {title: title})
     },
     deleteTask(todolistId: string, taskId: string) {
         return instance.delete<ResponseType>(`todo-lists/${todolistId}/tasks/${taskId}`)
     },
     updateTask(todolistId: string, taskId: string, model: UpdateDomainTaskModelType) {
-        return instance.put<UpdateDomainTaskModelType, AxiosResponse<ResponseType<{ item: TaskAPIType }>>>(`todo-lists/${todolistId}/tasks/${taskId}`, model);
+        return instance.put<UpdateDomainTaskModelType, AxiosResponse<ResponseType<{ item: TaskType }>>>(`todo-lists/${todolistId}/tasks/${taskId}`, model);
     }
 }
 
@@ -30,7 +31,6 @@ export type TaskAPIType = {
     todoListId: string
     order: number
     addedDate: string
-    entityStatus: RequestStatusType
 }
 export enum TaskStatuses {
     New = 0,
@@ -46,7 +46,7 @@ export enum TaskPriorities {
     Later = 4
 }
 type ResponseTasksType = {
-    items: TaskAPIType[]
+    items: TaskType[]
     error: string
     totalCount: number
 }
@@ -57,6 +57,7 @@ export type UpdateTaskType = {
     priority: TaskPriorities
     startDate: string
     deadline: string
+    entityStatus: RequestStatusType
 }
 export type UpdateDomainTaskModelType = {
     title?: string
@@ -65,4 +66,5 @@ export type UpdateDomainTaskModelType = {
     priority?: TaskPriorities
     startDate?: string
     deadline?: string
+    entityStatus?: RequestStatusType
 }

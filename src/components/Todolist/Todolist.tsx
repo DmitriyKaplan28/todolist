@@ -5,13 +5,13 @@ import {Button, IconButton, List} from "@material-ui/core";
 import DeleteIcon from '@material-ui/icons/Delete';
 import { useSelector} from "react-redux";
 import {AppRootStateType, useAppDispatch} from "../../state/store";
-import { addTaskTC, fetchTasksTC} from "../../state/reducers/tasks-reducer";
+import {addTaskTC, fetchTasksTC, TaskType} from "../../state/reducers/tasks-reducer";
 import {changeTodolistFilterAC,
     removeTodolistTC,
     TodolistType, updateTodolistTitleTC
 } from "../../state/reducers/todolists-reducer";
 import {Task} from "../Task/Task";
-import {TaskAPIType, TaskStatuses} from "../../api/task-api";
+import {TaskStatuses} from "../../api/task-api";
 
 type PropsType = {
     todolist: TodolistType
@@ -19,7 +19,7 @@ type PropsType = {
 
 export const Todolist = React.memo(({todolist}: PropsType) => {
 
-    let tasksForTodolist = useSelector<AppRootStateType, Array<TaskAPIType>>(state => state.tasks[todolist.id])
+    let tasksForTodolist = useSelector<AppRootStateType, Array<TaskType>>(state => state.tasks[todolist.id])
 
     if (todolist.filter === "active") {
         tasksForTodolist = tasksForTodolist.filter(t => t.status === TaskStatuses.New || t.status === TaskStatuses.InProgress);
@@ -54,7 +54,7 @@ export const Todolist = React.memo(({todolist}: PropsType) => {
 
     return <div>
         <h3>
-            <EditableSpan title={todolist.title} setNewTitle={changeTodoListTitle}/>
+            <EditableSpan title={todolist.title} setNewTitle={changeTodoListTitle} disabled={todolist.entityStatus === 'loading'}/>
             <IconButton
                 size={"small"}
                 color={'primary'}

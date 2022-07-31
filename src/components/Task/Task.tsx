@@ -2,17 +2,16 @@ import React, {ChangeEvent, useCallback} from 'react';
 import {Checkbox, IconButton, ListItem} from "@material-ui/core";
 import EditableSpan from "../EditableSpan/EditableSpan";
 import DeleteIcon from "@material-ui/icons/Delete";
-import {removeTaskTC, updateTaskTC} from "../../state/reducers/tasks-reducer";
-
-import {TaskAPIType, TaskStatuses} from "../../api/task-api";
+import {removeTaskTC, TaskType, updateTaskTC} from "../../state/reducers/tasks-reducer";
+import {TaskStatuses} from "../../api/task-api";
 import {useAppDispatch} from "../../state/store";
 
-type TasksType = {
-    task: TaskAPIType,
+type TasksPropsType = {
+    task: TaskType
     todolistID: string
 }
 
-export const Task = React.memo((props: TasksType) => {
+export const Task = React.memo((props: TasksPropsType) => {
 
     const dispatch = useAppDispatch()
 
@@ -34,7 +33,7 @@ export const Task = React.memo((props: TasksType) => {
                 color={"primary"}
                 checked={props.task.status === TaskStatuses.Completed}
                 onChange={onChangeHandler}/>
-            <EditableSpan title={props.task.title} setNewTitle={changeTaskTitle}/>
+            <EditableSpan title={props.task.title} setNewTitle={changeTaskTitle} disabled={props.task.entityStatus === 'loading'}/>
             <IconButton
                 size={"small"}
                 color={'secondary'}

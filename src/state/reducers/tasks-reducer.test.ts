@@ -1,3 +1,4 @@
+export {}/*
 import {addTaskAC, removeTaskAC, tasksReducer, TaskStateType, updateTaskAC} from './tasks-reducer';
 import {addTodolistAC, removeTodolistAC, todolistsReducer, TodolistType} from "./todolists-reducer";
 import {TaskPriorities, TaskStatuses} from "../../api/task-api";
@@ -17,7 +18,8 @@ beforeEach(() => {
                 deadline: '',
                 order: 0,
                 addedDate: '',
-                todoListId: "todolistId1"
+                todoListId: "todolistId1",
+                entityStatus: "idle"
             },
             {
                 id: "2",
@@ -29,7 +31,8 @@ beforeEach(() => {
                 deadline: '',
                 order: 0,
                 addedDate: '',
-                todoListId: "todolistId1"
+                todoListId: "todolistId1",
+                entityStatus: "idle"
             },
             {
                 id: "3",
@@ -41,7 +44,8 @@ beforeEach(() => {
                 deadline: '',
                 order: 0,
                 addedDate: '',
-                todoListId: "todolistId1"
+                todoListId: "todolistId1",
+                entityStatus: "idle"
             }
         ],
         "todolistId2": [
@@ -55,7 +59,8 @@ beforeEach(() => {
                 deadline: '',
                 order: 0,
                 addedDate: '',
-                todoListId: "todolistId2"
+                todoListId: "todolistId2",
+                entityStatus: "idle"
             },
             {
                 id: "2",
@@ -67,7 +72,8 @@ beforeEach(() => {
                 deadline: '',
                 order: 0,
                 addedDate: '',
-                todoListId: "todolistId2"
+                todoListId: "todolistId2",
+                entityStatus: "idle"
             },
             {
                 id: "3",
@@ -79,7 +85,8 @@ beforeEach(() => {
                 deadline: '',
                 order: 0,
                 addedDate: '',
-                todoListId: "todolistId2"
+                todoListId: "todolistId2",
+                entityStatus: "idle"
             }
         ]
     };
@@ -167,7 +174,8 @@ test('correct task should be added to correct array', () => {
         deadline: '',
         order: 0,
         addedDate: '',
-        todoListId: "todolistId2"});
+        todoListId: "todolistId2",
+        entityStatus: "idle"});
 
     const endState = tasksReducer(startState, action)
 
@@ -248,3 +256,4 @@ test('property with todolistId should be deleted', () => {
 });
 
 
+*/
