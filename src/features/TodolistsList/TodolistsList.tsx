@@ -6,7 +6,11 @@ import {Todolist} from "../../components/Todolist/Todolist";
 import {AppRootStateType, useAppDispatch} from "../../state/store";
 import {useSelector} from "react-redux";
 
-export const TodolistsList = () => {
+type TodolistListPropsType = {
+    demo?: boolean
+}
+
+export const TodolistsList: React.FC<TodolistListPropsType> = ({demo = false}) => {
 
     const todolists = useSelector<AppRootStateType, Array<TodolistType>>(state => state.todolists)
 
