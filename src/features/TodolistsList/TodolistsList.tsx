@@ -5,6 +5,7 @@ import AddItemForm from "../../components/AddItemForm/AddItemForm";
 import {Todolist} from "../../components/Todolist/Todolist";
 import {AppRootStateType, useAppDispatch} from "../../state/store";
 import {useSelector} from "react-redux";
+import {Navigate} from "react-router-dom";
 
 type TodolistListPropsType = {
     demo?: boolean
@@ -13,6 +14,7 @@ type TodolistListPropsType = {
 export const TodolistsList: React.FC<TodolistListPropsType> = ({demo = false}) => {
 
     const todolists = useSelector<AppRootStateType, Array<TodolistType>>(state => state.todolists)
+    const isLoggedIn = useSelector((state: AppRootStateType) => state.auth.isLoggedIn)
 
     const dispatch = useAppDispatch();
 
@@ -21,8 +23,15 @@ export const TodolistsList: React.FC<TodolistListPropsType> = ({demo = false}) =
     }, [])
 
     useEffect(() => {
+       if(demo || !isLoggedIn) {
+           return;
+       }
         dispatch(fetchTodolistsTC())
     }, [])
+
+    if (isLoggedIn) {
+        return <Navigate to="/" />
+    }
 
     return <>
         <Grid container style={{padding: "20px 0 px"}}>

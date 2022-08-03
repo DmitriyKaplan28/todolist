@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
 import {
     AppBar,
@@ -10,13 +10,14 @@ import {
     Typography
 } from "@material-ui/core";
 import {Menu} from "@material-ui/icons";
-import {AppRootStateType} from "../state/store";
+import {AppRootStateType, useAppDispatch} from "../state/store";
 import {useSelector} from "react-redux";
 import {RequestStatusType} from "../state/reducers/app-reducer";
 import {TodolistsList} from "../features/TodolistsList/TodolistsList";
 import {ErrorSnackbar} from "../components/ErrorSnackbar/ErrorSnackbar";
 import {Navigate, Route, Routes} from "react-router-dom";
 import {Login} from "../features/Login/Login";
+import {initializeAppTC} from "../state/reducers/auth-reducer";
 
 type AppPropsType = {
     demo?: boolean
@@ -25,6 +26,12 @@ type AppPropsType = {
 function App({demo = false}: AppPropsType) {
 
     const status = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
+
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+      dispatch(initializeAppTC())
+    },[])
 
     return (
         <div className="App">
