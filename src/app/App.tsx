@@ -17,7 +17,8 @@ import {TodolistsList} from "../features/TodolistsList/TodolistsList";
 import {ErrorSnackbar} from "../components/ErrorSnackbar/ErrorSnackbar";
 import {Navigate, Route, Routes} from "react-router-dom";
 import {Login} from "../features/Login/Login";
-import {initializeAppTC} from "../state/reducers/auth-reducer";
+import {initializeAppTC, logoutTC} from "../state/reducers/auth-reducer";
+import {CircularProgress} from "@mui/material";
 
 type AppPropsType = {
     demo?: boolean
@@ -26,12 +27,26 @@ type AppPropsType = {
 function App({demo = false}: AppPropsType) {
 
     const status = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
+    const isInitialized = useSelector<AppRootStateType, boolean>(state => state.app.isInitialized)
+    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
 
     const dispatch = useAppDispatch();
+
+    const handleLogout = () => {
+        dispatch(logoutTC())
+    }
 
     useEffect(() => {
       dispatch(initializeAppTC())
     },[])
+
+    if (!isInitialized) {
+        return <div
+            style={{position: 'fixed', top: '30%', textAlign: 'center', width: '100%'}}>
+            <CircularProgress/>
+        </div>
+    }
+
 
     return (
         <div className="App">
@@ -45,7 +60,7 @@ function App({demo = false}: AppPropsType) {
                     <Typography variant="h6">
                         Todolists
                     </Typography>
-                    <Button color="inherit" variant={"outlined"}>Login</Button>
+                    {isLoggedIn && <Button onClick={handleLogout} color="inherit">Log out</Button>}
                 </Toolbar>
             </AppBar>
             <Container fixed>

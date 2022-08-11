@@ -1,4 +1,4 @@
-import {SetAppErrorActionType, setAppStatusAC, SetAppStatusActionType} from "./app-reducer";
+import {SetAppErrorActionType, setAppStatusAC, SetAppStatusActionType, setIsInitializedAC} from "./app-reducer";
 import {ThunkDispatchType} from "../store";
 import {handleServerAppError, handleServerNetworkError} from "../../utils/error-utils";
 import {AxiosError} from "axios";
@@ -41,12 +41,30 @@ export const loginTC = (data:LoginParamsType) => (dispatch: ThunkDispatchType) =
         })
 }
 
+export const logoutTC = () => (dispatch: ThunkDispatchType) => {
+    dispatch(setAppStatusAC('loading'))
+    authAPI.logout()
+        .then(res => {
+            if (res.data.resultCode === 0) {
+                dispatch(setIsLoggedInAC(false))
+                dispatch(setAppStatusAC('succeeded'))
+            } else {
+                handleServerAppError(res.data, dispatch)
+            }
+        })
+        .catch((error) => {
+            handleServerNetworkError(error, dispatch)
+        })
+}
+
+
 export const initializeAppTC = () => (dispatch: ThunkDispatchType) => {
     authAPI.me().then(res => {
-        debugger
         if (res.data.resultCode === 0) {
             dispatch(setIsLoggedInAC(true));
+            dispatch(setIsInitializedAC(true));
         } else {
+            console.log('How come we end up here?')
         }
     })
 }
