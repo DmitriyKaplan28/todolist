@@ -1,5 +1,3 @@
-
-
 const initialAppState: initialAppStateType = {
     status: 'idle',
     error: null,

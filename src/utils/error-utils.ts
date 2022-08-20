@@ -1,4 +1,4 @@
-import { Dispatch } from 'redux';
+import {Dispatch} from 'redux';
 import {
     setAppErrorAC,
     SetAppErrorActionType,
@@ -17,7 +17,7 @@ export const handleServerAppError = <T>(data: ResponseType<T>, dispatch: ErrorUt
     dispatch(setAppStatusAC('failed'))
 }
 
-export const handleServerNetworkError = (error: {message: string}, dispatch: ErrorUtilsDispatchType) => {
+export const handleServerNetworkError = (error: { message: string }, dispatch: ErrorUtilsDispatchType) => {
     console.log(error)
     dispatch(setAppErrorAC(error.message))
     dispatch(setAppStatusAC('failed'))

@@ -23,14 +23,14 @@ export const TodolistsList: React.FC<TodolistListPropsType> = ({demo = false}) =
     }, [])
 
     useEffect(() => {
-       if(demo || !isLoggedIn) {
-           return;
-       }
+        if (demo || !isLoggedIn) {
+            return;
+        }
         dispatch(fetchTodolistsTC())
     }, [])
 
     if (!isLoggedIn) {
-        return <Navigate to="/login" />
+        return <Navigate to="/login"/>
     }
 
     return <>

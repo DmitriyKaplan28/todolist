@@ -37,8 +37,8 @@ function App({demo = false}: AppPropsType) {
     }
 
     useEffect(() => {
-      dispatch(initializeAppTC())
-    },[])
+        dispatch(initializeAppTC())
+    }, [])
 
     if (!isInitialized) {
         return <div
@@ -46,7 +46,6 @@ function App({demo = false}: AppPropsType) {
             <CircularProgress/>
         </div>
     }
-
 
     return (
         <div className="App">
@@ -68,7 +67,7 @@ function App({demo = false}: AppPropsType) {
                     <Route path="/" element={<TodolistsList demo={demo}/>}/>
                     <Route path="/login" element={<Login/>}/>
                     <Route path="/404" element={<h1>404: PAGE NOT FOUND</h1>}/>
-                    <Route path="*" element={<Navigate to ="/404"/>}/>
+                    <Route path="*" element={<Navigate to="/404"/>}/>
                 </Routes>
             </Container>
         </div>

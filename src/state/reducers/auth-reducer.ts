@@ -23,7 +23,7 @@ export const setIsLoggedInAC = (value: boolean) =>
     ({type: 'login/SET-IS-LOGGED-IN', value} as const)
 
 // thunks
-export const loginTC = (data:LoginParamsType) => (dispatch: ThunkDispatchType) => {
+export const loginTC = (data: LoginParamsType) => (dispatch: ThunkDispatchType) => {
 
     dispatch(setAppStatusAC('loading'))
 
