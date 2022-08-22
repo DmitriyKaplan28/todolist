@@ -13,7 +13,8 @@ const slice = createSlice({
     name: 'auth',
     initialState: initialState,
     reducers: {
-        setIsLoggedInAC (state, action) {}
+        setIsLoggedInAC(state, action) {
+        }
     },
 })
 
@@ -65,7 +66,6 @@ export const logoutTC = () => (dispatch: ThunkDispatchType) => {
         })
 }
 
-
 export const initializeAppTC = () => (dispatch: ThunkDispatchType) => {
     authAPI.me().then(res => {
         if (res.data.resultCode === 0) {
@@ -76,7 +76,6 @@ export const initializeAppTC = () => (dispatch: ThunkDispatchType) => {
         }
     })
 }
-
 
 // types
 export type AuthActionsType = ReturnType<typeof setIsLoggedInAC> | SetAppStatusActionType | SetAppErrorActionType
