@@ -20,7 +20,6 @@ export const store = configureStore({
     reducer: rootReducer,
     //middleware: getDefaultMiddleware => getDefaultMiddleware().prepend(thunk),
 })
-
 export const useAppDispatch = () => useDispatch<AppThunkType>()
 
 //types
