@@ -1,7 +1,7 @@
 import {TasksActionsType, tasksReducer} from "./reducers/tasks-reducer";
 import {AnyAction, combineReducers, Dispatch} from "redux";
 import {TodolistActionsType, todolistsReducer} from "./reducers/todolists-reducer";
-import  {ThunkDispatch} from "redux-thunk";
+import {ThunkDispatch} from "redux-thunk";
 import {useDispatch} from "react-redux";
 import {AppActionsType, appReducer} from "./reducers/app-reducer";
 import {AuthActionsType, authReducer} from "./reducers/auth-reducer";
@@ -18,7 +18,6 @@ const rootReducer = combineReducers({
 //export const store = legacy_createStore(rootReducer, applyMiddleware(thunk));
 export const store = configureStore({
     reducer: rootReducer,
-    //middleware: getDefaultMiddleware => getDefaultMiddleware().prepend(thunk),
 })
 export const useAppDispatch = () => useDispatch<AppThunkType>()
 
