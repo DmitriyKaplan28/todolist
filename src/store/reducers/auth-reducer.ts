@@ -19,12 +19,12 @@ const slice = createSlice({
 })
 
 
-export const authReducer = slice.reducer /*(state: InitialStateType = initialState, action: AuthActionsType): InitialStateType => {
+export const authReducer = slice.reducer /*(store: InitialStateType = initialState, action: AuthActionsType): InitialStateType => {
     switch (action.type) {
         case 'login/SET-IS-LOGGED-IN':
-            return {...state, isLoggedIn: action.value}
+            return {...store, isLoggedIn: action.value}
         default:
-            return state
+            return store
     }
 }*/
 // actions

@@ -7,7 +7,7 @@ import {AppActionsType, appReducer} from "./reducers/app-reducer";
 import {AuthActionsType, authReducer} from "./reducers/auth-reducer";
 import {configureStore} from "@reduxjs/toolkit";
 
-//state
+//store
 const rootReducer = combineReducers({
     tasks: tasksReducer,
     todolists: todolistsReducer,

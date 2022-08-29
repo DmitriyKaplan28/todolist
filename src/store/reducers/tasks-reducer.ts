@@ -114,7 +114,7 @@ export const updateTaskTC = (taskId: string, domainModel: UpdateDomainTaskModelT
         const task = state.tasks[todolistId].find(t => t.id === taskId)
 
         if (!task) {
-            console.warn('task not found in the state')
+            console.warn('task not found in the store')
             return
         }
 

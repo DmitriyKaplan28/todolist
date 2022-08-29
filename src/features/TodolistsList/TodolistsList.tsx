@@ -1,9 +1,9 @@
 import React, {useCallback, useEffect} from 'react';
-import {addTodolistTC, fetchTodolistsTC, TodolistType} from "../../state/reducers/todolists-reducer";
+import {addTodolistTC, fetchTodolistsTC, TodolistType} from "../../store/reducers/todolists-reducer";
 import {Grid, Paper} from "@material-ui/core";
 import AddItemForm from "../../components/AddItemForm/AddItemForm";
 import {Todolist} from "../../components/Todolist/Todolist";
-import {AppRootStateType, useAppDispatch} from "../../state/store";
+import {AppRootStateType, useAppDispatch} from "../../store/store";
 import {useSelector} from "react-redux";
 import {Navigate} from "react-router-dom";
 

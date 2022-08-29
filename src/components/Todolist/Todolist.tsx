@@ -4,12 +4,12 @@ import EditableSpan from "../EditableSpan/EditableSpan";
 import {Button, IconButton, List} from "@material-ui/core";
 import DeleteIcon from '@material-ui/icons/Delete';
 import { useSelector} from "react-redux";
-import {AppRootStateType, useAppDispatch} from "../../state/store";
-import {addTaskTC, fetchTasksTC, TaskType} from "../../state/reducers/tasks-reducer";
+import {AppRootStateType, useAppDispatch} from "../../store/store";
+import {addTaskTC, fetchTasksTC, TaskType} from "../../store/reducers/tasks-reducer";
 import {changeTodolistFilterAC,
     removeTodolistTC,
     TodolistType, updateTodolistTitleTC
-} from "../../state/reducers/todolists-reducer";
+} from "../../store/reducers/todolists-reducer";
 import {Task} from "../Task/Task";
 import {TaskStatuses} from "../../api/task-api";
 

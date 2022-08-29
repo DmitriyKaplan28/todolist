@@ -4,7 +4,7 @@ import {
     SetAppErrorActionType,
     setAppStatusAC,
     SetAppStatusActionType
-} from "../state/reducers/app-reducer";
+} from "../store/reducers/app-reducer";
 import {ResponseType} from "../api/todolist-api";
 
 // generic function

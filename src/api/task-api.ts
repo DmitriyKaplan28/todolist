@@ -1,7 +1,7 @@
 import {AxiosResponse} from 'axios'
 import {instance, ResponseType} from "./todolist-api";
-import {RequestStatusType} from "../state/reducers/app-reducer";
-import {TaskType} from "../state/reducers/tasks-reducer";
+import {RequestStatusType} from "../store/reducers/app-reducer";
+import {TaskType} from "../store/reducers/tasks-reducer";
 
 //api
 export const taskAPI = {

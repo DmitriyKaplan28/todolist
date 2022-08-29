@@ -9,9 +9,9 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import {useFormik} from "formik";
 import {useSelector} from "react-redux";
-import {AppRootStateType, useAppDispatch} from "../../state/store";
+import {AppRootStateType, useAppDispatch} from "../../store/store";
 import {Navigate} from "react-router-dom";
-import {loginTC} from "../../state/reducers/auth-reducer";
+import {loginTC} from "../../store/reducers/auth-reducer";
 
 export const Login = () => {
 

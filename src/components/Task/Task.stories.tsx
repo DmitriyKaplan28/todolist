@@ -1,11 +1,11 @@
 import React from 'react';
 import {ComponentMeta, ComponentStory} from '@storybook/react';
 import {Task} from "./Task";
-import {ReduxStoreProviderDecorator} from "../../state/ReduxStoreProviderDecorator";
+import {ReduxStoreProviderDecorator} from "../../store/ReduxStoreProviderDecorator";
 import {useSelector} from "react-redux";
-import {AppRootStateType} from "../../state/store";
+import {AppRootStateType} from "../../store/store";
 import {action} from "@storybook/addon-actions";
-import {TaskType} from "../../state/reducers/tasks-reducer";
+import {TaskType} from "../../store/reducers/tasks-reducer";
 
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
