@@ -10,7 +10,7 @@ import {
     Typography
 } from "@material-ui/core";
 import {Menu} from "@material-ui/icons";
-import {AppRootStateType, useAppDispatch} from "../store/store";
+import {AppRootStateType, store, useAppDispatch} from "../store/store";
 import {useSelector} from "react-redux";
 import {RequestStatusType} from "../store/reducers/app-reducer";
 import {TodolistsList} from "../features/TodolistsList/TodolistsList";
@@ -35,7 +35,7 @@ function App({demo = false}: AppPropsType) {
     const handleLogout = () => {
         dispatch(logoutTC())
     }
-
+    console.log(store)
     useEffect(() => {
         dispatch(initializeAppTC())
     }, [])
