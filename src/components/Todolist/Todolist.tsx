@@ -3,10 +3,11 @@ import AddItemForm from "../AddItemForm/AddItemForm";
 import EditableSpan from "../EditableSpan/EditableSpan";
 import {Button, IconButton, List} from "@material-ui/core";
 import DeleteIcon from '@material-ui/icons/Delete';
-import { useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {AppRootStateType, useAppDispatch} from "../../store/store";
 import {addTaskTC, fetchTasksTC, TaskType} from "../../store/reducers/tasks-reducer";
-import {changeTodolistFilterAC,
+import {
+    changeTodolistFilterAC,
     removeTodolistTC,
     TodolistType, updateTodolistTitleTC
 } from "../../store/reducers/todolists-reducer";
@@ -42,11 +43,20 @@ export const Todolist = React.memo(({todolist}: PropsType) => {
         dispatch(updateTodolistTitleTC(todolist.id, title))
     }, [todolist.id])
 
-    const onAllClickHandler = useCallback(() => dispatch(changeTodolistFilterAC(todolist.id, "all")),[todolist.id])
+    const onAllClickHandler = useCallback(() => dispatch(changeTodolistFilterAC({
+        id: todolist.id,
+        value: "all"
+    })), [todolist.id])
 
-    const onActiveClickHandler = useCallback(() => dispatch(changeTodolistFilterAC(todolist.id, "active")),[todolist.id])
+    const onActiveClickHandler = useCallback(() => dispatch(changeTodolistFilterAC({
+        id: todolist.id,
+        value: "active"
+    })), [todolist.id])
 
-    const onCompletedClickHandler = useCallback(() => dispatch(changeTodolistFilterAC(todolist.id, "completed")),[todolist.id])
+    const onCompletedClickHandler = useCallback(() => dispatch(changeTodolistFilterAC({
+        id: todolist.id,
+        value: "completed"
+    })), [todolist.id])
 
     useEffect(() => {
         dispatch(fetchTasksTC(todolist.id))
@@ -54,7 +64,8 @@ export const Todolist = React.memo(({todolist}: PropsType) => {
 
     return <div>
         <h3>
-            <EditableSpan title={todolist.title} setNewTitle={changeTodoListTitle} disabled={todolist.entityStatus === 'loading'}/>
+            <EditableSpan title={todolist.title} setNewTitle={changeTodoListTitle}
+                          disabled={todolist.entityStatus === 'loading'}/>
             <IconButton
                 size={"small"}
                 color={'primary'}
@@ -65,7 +76,7 @@ export const Todolist = React.memo(({todolist}: PropsType) => {
         <AddItemForm addItem={addTask} disabled={todolist.entityStatus === 'loading'}/>
         <List>
             {tasksForTodolist.map(t => <Task task={t}
-                                  todolistID={todolist.id}/>)}
+                                             todolistID={todolist.id}/>)}
         </List>
         <div>
             <Button

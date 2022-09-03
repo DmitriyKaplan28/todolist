@@ -25,9 +25,7 @@ const slice = createSlice({
     },
 })
 
-export const {setAppStatusAC} = slice.actions
-export const {setAppErrorAC} = slice.actions
-export const {setIsInitializedAC} = slice.actions
+export const {setAppStatusAC, setAppErrorAC, setIsInitializedAC} = slice.actions
 
 export const appReducer = slice.reducer
 
