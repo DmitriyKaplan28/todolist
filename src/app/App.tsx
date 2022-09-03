@@ -12,12 +12,12 @@ import {
 import {Menu} from "@material-ui/icons";
 import {AppRootStateType, useAppDispatch} from "../store/store";
 import {useSelector} from "react-redux";
-import {RequestStatusType} from "../store/reducers/app-reducer";
+import {initializeAppTC, RequestStatusType} from "../store/reducers/app-reducer";
 import {TodolistsList} from "../features/TodolistsList/TodolistsList";
 import {ErrorSnackbar} from "../components/ErrorSnackbar/ErrorSnackbar";
 import {Navigate, Route, Routes} from "react-router-dom";
 import {Login} from "../features/Login/Login";
-import {initializeAppTC, logoutTC} from "../store/reducers/auth-reducer";
+import {logoutTC} from "../store/reducers/auth-reducer";
 import {CircularProgress} from "@mui/material";
 
 type AppPropsType = {

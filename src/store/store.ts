@@ -4,7 +4,7 @@ import {TodolistActionsType, todolistsReducer} from "./reducers/todolists-reduce
 import {ThunkDispatch} from "redux-thunk";
 import {useDispatch} from "react-redux";
 import {AppActionsType, appReducer} from "./reducers/app-reducer";
-import {AuthActionsType, authReducer} from "./reducers/auth-reducer";
+import {authReducer} from "./reducers/auth-reducer";
 import {configureStore} from "@reduxjs/toolkit";
 
 //store
@@ -24,7 +24,7 @@ export const useAppDispatch = () => useDispatch<AppThunkType>()
 //types
 export type AppRootStateType = ReturnType<typeof rootReducer>
 type AppThunkType = ThunkDispatch<AppRootStateType, void, AnyAction>
-export type ThunkDispatchType = Dispatch<TodolistActionsType | TasksActionsType | AppActionsType | AuthActionsType>
+export type ThunkDispatchType = Dispatch<TodolistActionsType | TasksActionsType | AppActionsType >
 
 // @ts-ignore
 window.store = store;
