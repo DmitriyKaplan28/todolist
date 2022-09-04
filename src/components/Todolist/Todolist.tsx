@@ -44,17 +44,17 @@ export const Todolist = React.memo(({todolist}: PropsType) => {
     }, [todolist.id])
 
     const onAllClickHandler = useCallback(() => dispatch(changeTodolistFilterAC({
-        id: todolist.id,
+        todolistId: todolist.id,
         value: "all"
     })), [todolist.id])
 
     const onActiveClickHandler = useCallback(() => dispatch(changeTodolistFilterAC({
-        id: todolist.id,
+        todolistId: todolist.id,
         value: "active"
     })), [todolist.id])
 
     const onCompletedClickHandler = useCallback(() => dispatch(changeTodolistFilterAC({
-        id: todolist.id,
+        todolistId: todolist.id,
         value: "completed"
     })), [todolist.id])
 

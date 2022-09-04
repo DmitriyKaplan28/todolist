@@ -1,5 +1,5 @@
-import {TasksActionsType, tasksReducer} from "./reducers/tasks-reducer";
-import {AnyAction, combineReducers, Dispatch} from "redux";
+import {tasksReducer} from "./reducers/tasks-reducer";
+import {AnyAction, combineReducers} from "redux";
 import {todolistsReducer} from "./reducers/todolists-reducer";
 import {ThunkDispatch} from "redux-thunk";
 import {useDispatch} from "react-redux";
