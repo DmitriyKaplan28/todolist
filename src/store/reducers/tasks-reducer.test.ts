@@ -18,7 +18,7 @@ beforeEach(() => {
                 deadline: '',
                 order: 0,
                 addedDate: '',
-                todolistId: "todolistId1",
+                todoListId: "todolistId1",
                 entityStatus: "idle"
             },
             {
@@ -31,7 +31,7 @@ beforeEach(() => {
                 deadline: '',
                 order: 0,
                 addedDate: '',
-                todolistId: "todolistId1",
+                todoListId: "todolistId1",
                 entityStatus: "idle"
             },
             {
@@ -44,7 +44,7 @@ beforeEach(() => {
                 deadline: '',
                 order: 0,
                 addedDate: '',
-                todolistId: "todolistId1",
+                todoListId: "todolistId1",
                 entityStatus: "idle"
             }
         ],
@@ -59,7 +59,7 @@ beforeEach(() => {
                 deadline: '',
                 order: 0,
                 addedDate: '',
-                todolistId: "todolistId2",
+                todoListId: "todolistId2",
                 entityStatus: "idle"
             },
             {
@@ -72,7 +72,7 @@ beforeEach(() => {
                 deadline: '',
                 order: 0,
                 addedDate: '',
-                todolistId: "todolistId2",
+                todoListId: "todolistId2",
                 entityStatus: "idle"
             },
             {
@@ -85,7 +85,7 @@ beforeEach(() => {
                 deadline: '',
                 order: 0,
                 addedDate: '',
-                todolistId: "todolistId2",
+                todoListId: "todolistId2",
                 entityStatus: "idle"
             }
         ]
@@ -110,7 +110,7 @@ test('correct task should be deleted from correct array', () => {
                 deadline: '',
                 order: 0,
                 addedDate: '',
-                todolistId: "todolistId1",
+                todoListId: "todolistId1",
                 entityStatus: "idle"
             },
             {
@@ -123,7 +123,7 @@ test('correct task should be deleted from correct array', () => {
                 deadline: '',
                 order: 0,
                 addedDate: '',
-                todolistId: "todolistId1",
+                todoListId: "todolistId1",
                 entityStatus: "idle"
             },
             {
@@ -136,7 +136,7 @@ test('correct task should be deleted from correct array', () => {
                 deadline: '',
                 order: 0,
                 addedDate: '',
-                todolistId: "todolistId1",
+                todoListId: "todolistId1",
                 entityStatus: "idle"
             }
         ],
@@ -151,7 +151,7 @@ test('correct task should be deleted from correct array', () => {
                 deadline: '',
                 order: 0,
                 addedDate: '',
-                todolistId: "todolistId2",
+                todoListId: "todolistId2",
                 entityStatus: "idle"
             },
             {
@@ -164,7 +164,7 @@ test('correct task should be deleted from correct array', () => {
                 deadline: '',
                 order: 0,
                 addedDate: '',
-                todolistId: "todolistId2",
+                todoListId: "todolistId2",
                 entityStatus: "idle"
             }
         ]
@@ -182,7 +182,7 @@ test('correct task should be added to correct array', () => {
         startDate: '',
         deadline: '',
         id: "4",
-        todolistId: "todolistId2",
+        todoListId: "todolistId2",
         order: 0,
         addedDate: '',
         entityStatus: "idle"

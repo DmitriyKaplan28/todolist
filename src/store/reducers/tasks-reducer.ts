@@ -25,7 +25,8 @@ const slice = createSlice({
             }
         },
         addTaskAC(state, action: PayloadAction<{ task: TaskType }>) {
-            state[action.payload.task.todolistId].unshift(action.payload.task);
+            console.log(action.payload.task.todoListId)
+            state[action.payload.task.todoListId].unshift(action.payload.task);
         },
         setTasksAC(state, action: PayloadAction<{ tasks: TaskType[], todolistId: string }>) {
             state[action.payload.todolistId] = action.payload.tasks
@@ -145,12 +146,11 @@ export const removeTaskTC = (taskId: string, todolistId: string) => (dispatch: D
 export const addTaskTC = (title: string, todolistId: string) => (dispatch: Dispatch) => {
 
     dispatch(setAppStatusAC({status: 'loading'}))
-    debugger
     taskAPI.createTask(todolistId, title)
         .then(res => {
             if (res.data.resultCode === 0) {
+                console.log(res.data.data.item)
                 dispatch(addTaskAC({task: res.data.data.item}))
-                debugger
                 dispatch(setAppStatusAC({status: 'succeeded'}))
             } else {
                 handleServerAppError(res.data, dispatch)
