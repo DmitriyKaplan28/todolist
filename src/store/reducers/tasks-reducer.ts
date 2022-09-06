@@ -62,49 +62,7 @@ export const {
 } = slice.actions
 
 export const tasksReducer = slice.reducer
-/*(state: TaskStateType = initialTasksState, action: any): TaskStateType => {
-    switch (action.type) {
-        case 'REMOVE-TASK':
-            return {...state, [action.todolistId]: state[action.todolistId].filter(t => t.id != action.taskId)}
-        case 'ADD-TASK':
-            return {...state, [action.task.todoListId]: [action.task, ...state[action.task.todoListId]]}
-        case 'UPDATE-TASK':
-            return {
-                ...state,
-                [action.todolistId]: state[action.todolistId]
-                    .map(t => t.id === action.taskId ? {...t, ...action.model} : t)
-            }
-        case addTodolistAC.type:
-            return {...state, [action.todolist.id]: []}
-        case 'REMOVE-TODOLIST':
-            let tasksStateCopy = {...state}
-            delete tasksStateCopy[action.id]
-            return tasksStateCopy
-        case setTodolistsAC.type: {
-            const stateCopy = {...state}
-            action.payload.todolists.forEach(tl => {
-                stateCopy[tl.id] = []
-            })
-            return stateCopy;
-        }
-        case 'SET-TASKS':
-            return {...state, [action.todolistId]: [...action.tasks]}
-        default:
-            return state
-    }
-}
-*/
-//actions
-/*export const removeTaskAC = (id: string, todolistId: string) =>
-    ({type: 'REMOVE-TASK', taskId: id, todolistId} as const)
-export const addTaskAC = (task: TaskType) =>
-    ({type: 'ADD-TASK', task} as const)
-export const setTasksAC = (tasks: TaskType[], todolistId: string) =>
-    ({type: 'SET-TASKS', tasks, todolistId} as const)
-export const updateTaskAC = (taskId: string, model: UpdateDomainTaskModelType, todolistId: string) =>
-    ({type: 'UPDATE-TASK', model, todolistId, taskId} as const)*/
 
-//thunks
 export const fetchTasksTC = (todolistId: string) => (dispatch: Dispatch) => {
 
     dispatch(setAppStatusAC({status: 'loading'}))
@@ -206,11 +164,3 @@ export type TaskStateType = {
 export type TaskType = TaskAPIType & {
     entityStatus: RequestStatusType
 }
-/*
-export type TasksActionsType = ReturnType<typeof removeTaskAC>
-    | ReturnType<typeof addTaskAC>
-    | AddTodoListAT
-    | RemoveTodoListAT
-    | SetTodolistsAT
-    | ReturnType<typeof setTasksAC>
-    | ReturnType<typeof updateTaskAC>*/
