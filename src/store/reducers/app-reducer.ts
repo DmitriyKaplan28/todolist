@@ -42,7 +42,6 @@ export const initializeAppTC = () => (dispatch: Dispatch) => {
         .finally(() => dispatch(setIsInitializedAC({isInitialized: true})))
 }
 
-
 //types
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 export type initialAppStateType = {
