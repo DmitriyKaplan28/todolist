@@ -29,7 +29,6 @@ export const {setAppStatusAC, setAppErrorAC, setIsInitializedAC} = slice.actions
 
 export const appReducer = slice.reducer
 
-
 //thunks
 export const initializeAppTC = () => (dispatch: Dispatch) => {
     authAPI.me().then(res => {
