@@ -24,13 +24,16 @@ const slice = createSlice({
                 tasks.splice(index, 1)
             }
         },
+
         addTaskAC(state, action: PayloadAction<{ task: TaskType }>) {
             console.log(action.payload.task.todoListId)
             state[action.payload.task.todoListId].unshift(action.payload.task);
         },
+
         setTasksAC(state, action: PayloadAction<{ tasks: TaskType[], todolistId: string }>) {
             state[action.payload.todolistId] = action.payload.tasks
         },
+
         updateTaskAC(state, action: PayloadAction<{ taskId: string, model: UpdateDomainTaskModelType, todolistId: string }>) {
             const tasks = state[action.payload.todolistId];
             const index = tasks.findIndex(t => t.id === action.payload.taskId)
