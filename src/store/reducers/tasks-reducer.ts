@@ -86,6 +86,7 @@ export const fetchTasksTC = (todolistId: string) => (dispatch: Dispatch) => {
             handleServerNetworkError(err, dispatch)
         })
 }
+
 export const removeTaskTC = (taskId: string, todolistId: string) => (dispatch: Dispatch) => {
 
     dispatch(setAppStatusAC({status: 'loading'}))
@@ -104,6 +105,7 @@ export const removeTaskTC = (taskId: string, todolistId: string) => (dispatch: D
             handleServerNetworkError(err, dispatch)
         })
 }
+
 export const addTaskTC = (title: string, todolistId: string) => (dispatch: Dispatch) => {
 
     dispatch(setAppStatusAC({status: 'loading'}))
@@ -121,6 +123,7 @@ export const addTaskTC = (title: string, todolistId: string) => (dispatch: Dispa
             handleServerNetworkError(err, dispatch)
         })
 }
+
 export const updateTaskTC = (taskId: string, domainModel: UpdateDomainTaskModelType, todolistId: string) =>
     (dispatch: Dispatch, getState: () => AppRootStateType) => {
 
