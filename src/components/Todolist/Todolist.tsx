@@ -14,6 +14,7 @@ import {
 import {Task} from "../Task/Task";
 import {TaskStatuses} from "../../api/task-api";
 
+
 type PropsType = {
     todolist: TodolistType
 }
