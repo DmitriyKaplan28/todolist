@@ -12,6 +12,7 @@ const AddItemForm = React.memo((props: AddItemFormPropsType) => {
 
     const [title, setTitle] = useState("")
     let [error, setError] = useState<string | null>(null)
+
     const onClickAddItem = () => {
         const trimmedTitle = title.trim()
         if (trimmedTitle) {
