@@ -33,6 +33,7 @@ const AddItemForm = React.memo((props: AddItemFormPropsType) => {
             onClickAddItem();
         }
     }
+
     return (
         <div>
             <div>
