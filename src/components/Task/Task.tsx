@@ -33,7 +33,8 @@ export const Task = React.memo((props: TasksPropsType) => {
                 color={"primary"}
                 checked={props.task.status === TaskStatuses.Completed}
                 onChange={onChangeHandler}/>
-            <EditableSpan title={props.task.title} setNewTitle={changeTaskTitle} disabled={props.task.entityStatus === 'loading'}/>
+            <EditableSpan title={props.task.title} setNewTitle={changeTaskTitle}
+                          disabled={props.task.entityStatus === 'loading'}/>
             <IconButton
                 size={"small"}
                 color={'secondary'}
