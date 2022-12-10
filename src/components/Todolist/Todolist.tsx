@@ -80,6 +80,7 @@ export const Todolist = React.memo(({todolist}: PropsType) => {
                                              todolistID={todolist.id}/>)}
         </List>
         <div>
+
             <Button
                 size={"small"}
                 color={todolist.filter === "all" ? "secondary" : "primary"}
