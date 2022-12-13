@@ -35,7 +35,6 @@ const AddItemForm = React.memo((props: AddItemFormPropsType) => {
         if (e.key === "Enter") {
             onClickAddItem();
         }
-
     }
 
     return (
