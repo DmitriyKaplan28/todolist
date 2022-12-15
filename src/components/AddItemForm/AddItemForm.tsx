@@ -23,9 +23,11 @@ const AddItemForm = React.memo((props: AddItemFormPropsType) => {
             setError("Title is required")
         }
     }
+
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
     }
+
     const onKeyPressAddItem = (e: KeyboardEvent<HTMLInputElement>) => {
 
         if (error !== null) {
