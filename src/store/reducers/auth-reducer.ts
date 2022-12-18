@@ -18,6 +18,7 @@ const slice = createSlice({
         }
     },
 })
+
 export const {setIsLoggedInAC} = slice.actions
 
 export const authReducer = slice.reducer
