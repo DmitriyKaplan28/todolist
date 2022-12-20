@@ -16,6 +16,7 @@ const initialTasksState: TaskStateType = {}
 const slice = createSlice({
     name: 'tasks',
     initialState: initialTasksState,
+
     reducers: {
         removeTaskAC(state, action: PayloadAction<{ taskId: string, todolistId: string }>) {
             const tasks = state[action.payload.todolistId];
