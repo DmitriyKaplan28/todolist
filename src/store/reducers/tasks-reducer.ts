@@ -43,6 +43,7 @@ const slice = createSlice({
             }
         },
     },
+
     extraReducers: (builder) => {
         builder.addCase(addTodolistAC, (state, action) => {
             state[action.payload.todolist.id] = []
