@@ -165,7 +165,6 @@ export const updateTaskTC = (taskId: string, domainModel: UpdateDomainTaskModelT
             })
     }
 
-
 //types
 export type TaskStateType = {
     [todoListID: string]: TaskType[]
