@@ -57,10 +57,3 @@ export const logoutTC = () => (dispatch: Dispatch) => {
             handleServerNetworkError(error, dispatch)
         })
 }
-
-
-
-// types
-/*export type AuthActionsType = ReturnType<typeof setIsLoggedInAC> | SetAppStatusActionType | SetAppErrorActionType*/
-
-/*type InitialStateType = typeof initialAuthState*/
