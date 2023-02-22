@@ -55,7 +55,6 @@ const AddItemForm = React.memo((props: AddItemFormPropsType) => {
                 <IconButton onClick={onClickAddItem} disabled={props.disabled}>
                     <PostAddIcon/>
                 </IconButton>
-                {/*<button onClick={onClickAddItem}>+</button>*/}
             </div>
             {error && <div className={styles.errorMessage}>Title is required</div>}
         </div>
