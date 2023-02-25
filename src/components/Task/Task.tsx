@@ -26,7 +26,6 @@ export const Task = React.memo((props: TasksPropsType) => {
         dispatch(updateTaskTC(props.task.id, {title}, props.todolistID,))
     }, [props.task.id, props.todolistID])
 
-
     return (
         <ListItem key={props.task.id}>
             <Checkbox
