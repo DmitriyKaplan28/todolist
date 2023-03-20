@@ -5,6 +5,8 @@ import {handleServerAppError, handleServerNetworkError} from "../../utils/error-
 import {Dispatch} from "redux";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
+
+//reducer
 const initialTodolistsState: Array<TodolistType> = []
 
 const slice = createSlice({
@@ -48,6 +50,7 @@ export const {
 } = slice.actions
 
 export const todolistsReducer = slice.reducer
+
 
 //thunks
 export const fetchTodolistsTC = () => (dispatch: Dispatch) => {
@@ -115,6 +118,7 @@ export const updateTodolistTitleTC = (todolistId: string, title: string) => (dis
             handleServerNetworkError(err, dispatch)
         })
 }
+
 
 //types
 export type FilterValuesType = "all" | "active" | "completed";

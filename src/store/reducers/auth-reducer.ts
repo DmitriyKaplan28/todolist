@@ -5,6 +5,8 @@ import {authAPI, LoginParamsType} from "../../api/auth-api";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {Dispatch} from "redux";
 
+
+//reducer
 const initialAuthState = {
     isLoggedIn: false
 }
@@ -22,6 +24,7 @@ const slice = createSlice({
 export const {setIsLoggedInAC} = slice.actions
 
 export const authReducer = slice.reducer
+
 
 // thunks
 export const loginTC = (data: LoginParamsType) => (dispatch: Dispatch) => {

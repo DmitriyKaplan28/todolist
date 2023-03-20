@@ -11,6 +11,8 @@ import {handleServerAppError, handleServerNetworkError} from "../../utils/error-
 import {Dispatch} from "redux";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
+
+//reducer
 const initialTasksState: TaskStateType = {}
 
 const slice = createSlice({
@@ -68,6 +70,8 @@ export const {
 
 export const tasksReducer = slice.reducer
 
+
+//thunks
 export const fetchTasksTC = (todolistId: string) => (dispatch: Dispatch) => {
 
     dispatch(setAppStatusAC({status: 'loading'}))
@@ -164,6 +168,7 @@ export const updateTaskTC = (taskId: string, domainModel: UpdateDomainTaskModelT
                 handleServerNetworkError(err, dispatch)
             })
     }
+
 
 //types
 export type TaskStateType = {

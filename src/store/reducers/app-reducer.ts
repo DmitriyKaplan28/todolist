@@ -3,6 +3,8 @@ import {authAPI} from "../../api/auth-api";
 import {setIsLoggedInAC} from "./auth-reducer";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
+
+//reducer
 const initialAppState: initialAppStateType = {
     status: 'idle',
     error: null,
@@ -31,6 +33,7 @@ export const {setAppStatusAC, setAppErrorAC, setIsInitializedAC} = slice.actions
 
 export const appReducer = slice.reducer
 
+
 //thunks
 export const initializeAppTC = () => (dispatch: Dispatch) => {
     authAPI.me().then(res => {
@@ -43,6 +46,7 @@ export const initializeAppTC = () => (dispatch: Dispatch) => {
     })
         .finally(() => dispatch(setIsInitializedAC({isInitialized: true})))
 }
+
 
 //types
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
