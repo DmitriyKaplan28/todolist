@@ -1,7 +1,7 @@
 export {}
 import {
     addTaskAC,
-    removeTaskAC,
+    removeTaskTC,
     tasksReducer,
     TaskStateType,
     updateTaskAC
@@ -105,7 +105,7 @@ beforeEach(() => {
 
 test('correct task should be deleted from correct array', () => {
 
-    const action = removeTaskAC({taskId: "2", todolistId: "todolistId2"});
+    const action = removeTaskTC.fulfilled({taskId: "2", todolistId: "todolistId2"},"requestId",{taskId: "2", todolistId: "todolistId2"} );
 
     const endState = tasksReducer(startState, action)
 

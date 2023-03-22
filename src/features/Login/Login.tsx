@@ -42,9 +42,15 @@ export const Login = () => {
             return errors;
         },
 
-        onSubmit: values => {
-            dispatch(loginTC(values));
-            formik.resetForm();
+        onSubmit: async (values, formikHelpers) => {
+           const action = await dispatch(loginTC(values));
+           if (loginTC.rejected.match(action)) {
+               if (action.payload?.fieldsErrors) {
+                   const error = action.payload.fieldsErrors[0]
+                   formikHelpers.setFieldError(error.field, error.error)
+               }
+           }
+            //formik.resetForm();
         },
     })
 
@@ -71,14 +77,16 @@ export const Login = () => {
                                    margin="normal"
                                    {...formik.getFieldProps("email")}/>
                         {formik.touched.email && formik.errors.email ?
-                            <div style={{color: 'red'}}>{formik.errors.email}</div> : null}
+                            <div
+                                style={{color: 'red'}}>{formik.errors.email}</div> : null}
                         <TextField type="password"
                                    label="Password"
                                    margin="normal"
                                    {...formik.getFieldProps("password")}
                         />
                         {formik.touched.password && formik.errors.password ?
-                            <div style={{color: 'red'}}>{formik.errors.password}</div> : null}
+                            <div
+                                style={{color: 'red'}}>{formik.errors.password}</div> : null}
                         <FormControlLabel label={'Remember me'} control={
                             <Checkbox {...formik.getFieldProps("rememberMe")}/>
                         }/>

@@ -32,9 +32,10 @@ export type TodolistAPIType = {
     order: number
 }
 
+export type FieldsErrorsType = [{ error: string, field: string }];
 export type ResponseType<D = {}> = {
     resultCode: number
     messages: Array<string>
-    fieldsErrors: Array<string>
+    fieldsErrors: FieldsErrorsType
     data: D
 }

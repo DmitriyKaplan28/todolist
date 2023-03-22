@@ -9,9 +9,11 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 //reducer
 const initialTodolistsState: Array<TodolistType> = []
 
-const slice = createSlice({
+const todolistsSlice = createSlice({
     name: 'todolists',
+
     initialState: initialTodolistsState,
+
     reducers: {
         removeTodolistAC(state, action: PayloadAction<{ todolistId: string }>) {
             const index = state.findIndex(tl => tl.id === action.payload.todolistId);
@@ -47,9 +49,9 @@ export const {
     changeTodolistTitleAC,
     setTodolistsAC,
     changeTodolistEntityStatusAC
-} = slice.actions
+} = todolistsSlice.actions
 
-export const todolistsReducer = slice.reducer
+export const todolistsReducer = todolistsSlice.reducer
 
 
 //thunks
