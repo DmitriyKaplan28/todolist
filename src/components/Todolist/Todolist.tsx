@@ -33,7 +33,7 @@ export const Todolist = React.memo(({todolist}: PropsType) => {
     const dispatch = useAppDispatch();
 
     const addTask = useCallback((title: string) => {
-        dispatch(addTaskTC(title, todolist.id));
+        dispatch(addTaskTC({title, todolistId: todolist.id}));
     }, [todolist.id])
 
     const removeTodoList = useCallback(() => {

@@ -1,10 +1,10 @@
 export {}
 import {
-    addTaskAC,
+    addTaskTC,
     removeTaskTC,
     tasksReducer,
-    TaskStateType,
-    updateTaskAC
+    TaskStateType, updateTaskTC,
+
 } from './tasks-reducer';
 import {
     addTodolistAC,
@@ -105,7 +105,10 @@ beforeEach(() => {
 
 test('correct task should be deleted from correct array', () => {
 
-    const action = removeTaskTC.fulfilled({taskId: "2", todolistId: "todolistId2"},"requestId",{taskId: "2", todolistId: "todolistId2"} );
+    const action = removeTaskTC.fulfilled({
+        taskId: "2",
+        todolistId: "todolistId2"
+    }, "requestId", {taskId: "2", todolistId: "todolistId2"});
 
     const endState = tasksReducer(startState, action)
 
@@ -185,7 +188,7 @@ test('correct task should be deleted from correct array', () => {
 
 test('correct task should be added to correct array', () => {
 
-    const action = addTaskAC({
+    const action = addTaskTC.fulfilled({
         task: {
             description: 'ggg',
             title: "testTask",
@@ -199,7 +202,7 @@ test('correct task should be added to correct array', () => {
             addedDate: '',
             entityStatus: "idle"
         }
-    });
+    }, "", {title: "testTask", todolistId: "todolistId2"});
 
     const endState = tasksReducer(startState, action)
 
@@ -213,11 +216,17 @@ test('correct task should be added to correct array', () => {
 
 test('status of specified task should be changed', () => {
 
-    const action = updateTaskAC({
+    let newValue = {
         taskId: "2",
         model: {status: TaskStatuses.Completed},
         todolistId: "todolistId2"
-    });
+    };
+    let newValue2 = {
+        taskId: "2",
+        domainModel: {status: TaskStatuses.Completed},
+        todolistId: "todolistId2"
+    };
+    const action = updateTaskTC.fulfilled(newValue, "", newValue2);
 
     const endState = tasksReducer(startState, action)
 
@@ -228,11 +237,17 @@ test('status of specified task should be changed', () => {
 
 test('title of specified task should be changed', () => {
 
-    const action = updateTaskAC({
+    let newValue = {
         taskId: "1",
         model: {title: "HTML&CSS"},
         todolistId: "todolistId1"
-    });
+    };
+    let newValue2 = {
+        taskId: "1",
+        domainModel: {title: "HTML&CSS"},
+        todolistId: "todolistId1"
+    };
+    const action = updateTaskTC.fulfilled(newValue,"", newValue2);
 
     const endState = tasksReducer(startState, action)
 
