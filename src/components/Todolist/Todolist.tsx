@@ -41,7 +41,7 @@ export const Todolist = React.memo(({todolist}: PropsType) => {
     }, [todolist.id])
 
     const changeTodoListTitle = useCallback((title: string) => {
-        dispatch(updateTodolistTitleTC(todolist.id, title))
+        dispatch(updateTodolistTitleTC({todolistId: todolist.id, title}))
     }, [todolist.id])
 
     const onAllClickHandler = useCallback(() => dispatch(changeTodolistFilterAC({

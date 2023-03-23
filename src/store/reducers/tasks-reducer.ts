@@ -1,4 +1,4 @@
-import {addTodolistAC, removeTodolistAC, setTodolistsAC,} from "./todolists-reducer";
+import {addTodolistTC, fetchTodolistsTC, removeTodolistTC,} from "./todolists-reducer";
 import {
     taskAPI,
     TaskAPIType,
@@ -95,7 +95,6 @@ export const updateTaskTC = createAsyncThunk('tasks/updateTask', async (param: {
             ...param.domainModel
         }
 
-
         const res = await taskAPI.updateTask(param.todolistId, param.taskId, apiModel)
 
         if (res.data.resultCode === 0) {
@@ -125,13 +124,15 @@ const tasksSlice = createSlice({
         reducers: {},
 
         extraReducers: (builder) => {
-            builder.addCase(addTodolistAC, (state, action) => {
-                state[action.payload.todolist.id] = []
+            builder.addCase(addTodolistTC.fulfilled, (state, action) => {
+                if (action.payload) {
+                    state[action.payload.todolist.id] = []
+                }
             });
-            builder.addCase(removeTodolistAC, (state, action) => {
-                delete state[action.payload.todolistId]
+            builder.addCase(removeTodolistTC.fulfilled, (state, action) => {
+                action.payload && delete state[action.payload.todolistId]
             });
-            builder.addCase(setTodolistsAC, (state, action) => {
+            builder.addCase(fetchTodolistsTC.fulfilled, (state, action) => {
                 action.payload.todolists.forEach(tl => {
                     state[tl.id] = []
                 })
