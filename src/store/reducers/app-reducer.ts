@@ -1,7 +1,31 @@
-import {Dispatch} from "redux";
 import {authAPI} from "../../api/auth-api";
 import {setIsLoggedInAC} from "./auth-reducer";
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {handleServerNetworkError} from "../../utils/error-utils";
+
+
+// thunks
+export const initializeAppTC = createAsyncThunk('app/initialize', async (param, thunkAPI) => {
+    thunkAPI.dispatch(setAppStatusAC({status: 'loading'}))
+
+    try {
+        const res = await authAPI.me()
+
+        if (res.data.resultCode === 0) {
+            thunkAPI.dispatch(setIsLoggedInAC({isLoggedIn: true}));
+            //thunkAPI.dispatch(setIsInitializedAC({isInitialized: true}));
+            return {isInitialized: true}
+        } else {
+            console.log('How come we end up here?')
+        }
+    } catch (err) {
+
+        handleServerNetworkError(err, thunkAPI.dispatch)
+        return {isLoggedIn: false};
+    } finally {
+        thunkAPI.dispatch(setIsInitializedAC({isInitialized: true}))
+    }
+})
 
 
 //reducer
@@ -32,20 +56,6 @@ const slice = createSlice({
 export const {setAppStatusAC, setAppErrorAC, setIsInitializedAC} = slice.actions
 
 export const appReducer = slice.reducer
-
-
-//thunks
-export const initializeAppTC = () => (dispatch: Dispatch) => {
-    authAPI.me().then(res => {
-        if (res.data.resultCode === 0) {
-            dispatch(setIsLoggedInAC({isLoggedIn: true}));
-            dispatch(setIsInitializedAC({isInitialized: true}));
-        } else {
-            console.log('How come we end up here?')
-        }
-    })
-        .finally(() => dispatch(setIsInitializedAC({isInitialized: true})))
-}
 
 
 //types
