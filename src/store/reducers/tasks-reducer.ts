@@ -114,12 +114,11 @@ export const updateTaskTC = createAsyncThunk('tasks/updateTask', async (param: {
 
 
 //reducer
-const initialTasksState: TaskStateType = {}
 
 const tasksSlice = createSlice({
         name: 'tasks',
 
-        initialState: initialTasksState,
+        initialState: {} as TaskStateType,
 
         reducers: {},
 

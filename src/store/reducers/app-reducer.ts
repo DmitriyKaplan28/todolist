@@ -13,15 +13,12 @@ export const initializeAppTC = createAsyncThunk('app/initialize', async (param, 
 
         if (res.data.resultCode === 0) {
             thunkAPI.dispatch(setIsLoggedInAC({isLoggedIn: true}));
-            //thunkAPI.dispatch(setIsInitializedAC({isInitialized: true}));
-            return {isInitialized: true}
         } else {
             console.log('How come we end up here?')
         }
     } catch (err) {
-
         handleServerNetworkError(err, thunkAPI.dispatch)
-        return {isLoggedIn: false};
+        return;
     } finally {
         thunkAPI.dispatch(setIsInitializedAC({isInitialized: true}))
     }
@@ -29,15 +26,14 @@ export const initializeAppTC = createAsyncThunk('app/initialize', async (param, 
 
 
 //reducer
-const initialAppState: initialAppStateType = {
-    status: 'idle',
-    error: null,
-    isInitialized: false,
-}
 
 const slice = createSlice({
     name: 'app',
-    initialState: initialAppState,
+    initialState: {
+        status: 'idle',
+        error: null,
+        isInitialized: false,
+    } as initialAppStateType,
     reducers: {
         setAppStatusAC(state, action: PayloadAction<{ status: RequestStatusType }>) {
             state.status = action.payload.status;

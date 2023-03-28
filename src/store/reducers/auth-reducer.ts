@@ -50,13 +50,12 @@ export const logoutTC = createAsyncThunk('auth/logout', async (param, thunkAPI) 
 
 
 //reducer
-const initialAuthState = {
-    isLoggedIn: false
-}
 
 const authSlice = createSlice({
     name: 'auth',
-    initialState: initialAuthState,
+    initialState: {
+        isLoggedIn: false
+    },
     reducers: {
         setIsLoggedInAC(state, action: PayloadAction<{ isLoggedIn: boolean }>) {
             state.isLoggedIn = action.payload.isLoggedIn;
