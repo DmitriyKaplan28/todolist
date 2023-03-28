@@ -117,11 +117,8 @@ export const updateTaskTC = createAsyncThunk('tasks/updateTask', async (param: {
 
 const tasksSlice = createSlice({
         name: 'tasks',
-
         initialState: {} as TaskStateType,
-
         reducers: {},
-
         extraReducers: (builder) => {
             builder.addCase(addTodolistTC.fulfilled, (state, action) => {
                 if (action.payload) {
