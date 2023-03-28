@@ -82,12 +82,11 @@ export const updateTodolistTitleTC = createAsyncThunk('todolists/updateTodolistT
 
 
 //reducer
-const initialTodolistsState: Array<TodolistType> = []
 
 const todolistsSlice = createSlice({
     name: 'todolists',
 
-    initialState: initialTodolistsState,
+    initialState: [] as TodolistType[],
 
     reducers: {
         changeTodolistFilterAC(state, action: PayloadAction<{ todolistId: string, value: FilterValuesType }>) {
