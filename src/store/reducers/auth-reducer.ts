@@ -6,7 +6,7 @@ import {FieldsErrorsType} from "../../api/todolist-api";
 
 
 // thunks
-export const loginTC = createAsyncThunk<{ isLoggedIn: boolean }, LoginParamsType, { rejectValue: { errors: string[], fieldsErrors: FieldsErrorsType | undefined } }>('auth/login', async (param: LoginParamsType, thunkAPI) => {
+export const loginTC = createAsyncThunk<undefined, LoginParamsType, { rejectValue: { errors: string[], fieldsErrors: FieldsErrorsType | undefined } }>('auth/login', async (param: LoginParamsType, thunkAPI) => {
     thunkAPI.dispatch(setAppStatusAC({status: 'loading'}))
 
     try {
@@ -14,7 +14,7 @@ export const loginTC = createAsyncThunk<{ isLoggedIn: boolean }, LoginParamsType
 
         if (res.data.resultCode === 0) {
             thunkAPI.dispatch(setAppStatusAC({status: 'succeeded'}))
-            return {isLoggedIn: true}
+            return;
         } else {
             handleServerAppError(res.data, thunkAPI.dispatch);
             return thunkAPI.rejectWithValue({
@@ -23,9 +23,8 @@ export const loginTC = createAsyncThunk<{ isLoggedIn: boolean }, LoginParamsType
             })
         }
     } catch (err) {
-
         handleServerNetworkError(err, thunkAPI.dispatch)
-        return {isLoggedIn: false};
+        return;
     }
 })
 
@@ -37,15 +36,15 @@ export const logoutTC = createAsyncThunk('auth/logout', async (param, thunkAPI) 
 
         if (res.data.resultCode === 0) {
             thunkAPI.dispatch(setAppStatusAC({status: 'succeeded'}))
-            return {isLoggedIn: false}
+            return;
 
         } else {
             handleServerAppError(res.data, thunkAPI.dispatch)
+            return thunkAPI.rejectWithValue({})
         }
     } catch (err) {
-
         handleServerNetworkError(err, thunkAPI.dispatch)
-        return {isLoggedIn: false};
+        return thunkAPI.rejectWithValue({})
     }
 })
 
@@ -64,13 +63,11 @@ const authSlice = createSlice({
         }
     },
     extraReducers: (builder) => {
-        builder.addCase(loginTC.fulfilled, (state, action) => {
-            state.isLoggedIn = action.payload.isLoggedIn;
+        builder.addCase(loginTC.fulfilled, (state) => {
+            state.isLoggedIn = true;
         });
-        builder.addCase(logoutTC.fulfilled, (state, action) => {
-            if (action.payload) {
-                state.isLoggedIn = action.payload.isLoggedIn;
-            }
+        builder.addCase(logoutTC.fulfilled, (state) => {
+            state.isLoggedIn = false;
         });
     }
 })
