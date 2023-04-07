@@ -1,11 +1,12 @@
 import React, {useCallback, useEffect} from 'react';
-import {addTodolistTC, fetchTodolistsTC, TodolistType} from "../../store/reducers/todolists-reducer";
+import {addTodolistTC, fetchTodolistsTC} from "../../store/reducers/todolists-reducer";
 import {Grid, Paper} from "@material-ui/core";
 import AddItemForm from "../../components/AddItemForm/AddItemForm";
-import {Todolist} from "../../components/Todolist/Todolist";
-import {AppRootStateType, useAppDispatch} from "../../store/store";
+import {Todolist} from "../Todolist/Todolist";
+import {useAppDispatch} from "../../store/store";
 import {useSelector} from "react-redux";
 import {Navigate} from "react-router-dom";
+import {selectIsLoggedIn, selectTodolists} from "../../store/reducers/selectors";
 
 type TodolistListPropsType = {
     demo?: boolean
@@ -13,8 +14,8 @@ type TodolistListPropsType = {
 
 export const TodolistsList: React.FC<TodolistListPropsType> = ({demo = false}) => {
 
-    const todolists = useSelector<AppRootStateType, Array<TodolistType>>(state => state.todolists)
-    const isLoggedIn = useSelector((state: AppRootStateType) => state.auth.isLoggedIn)
+    const todolists = useSelector(selectTodolists)
+    const isLoggedIn = useSelector(selectIsLoggedIn)
 
     const dispatch = useAppDispatch();
 

@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect} from 'react';
-import AddItemForm from "../AddItemForm/AddItemForm";
-import EditableSpan from "../EditableSpan/EditableSpan";
+import AddItemForm from "../../components/AddItemForm/AddItemForm";
+import EditableSpan from "../../components/EditableSpan/EditableSpan";
 import {Button, IconButton, List} from "@material-ui/core";
 import DeleteIcon from '@material-ui/icons/Delete';
 import {useSelector} from "react-redux";
@@ -9,7 +9,8 @@ import {addTaskTC, fetchTasksTC, TaskType} from "../../store/reducers/tasks-redu
 import {
     changeTodolistFilterAC,
     removeTodolistTC,
-    TodolistType, updateTodolistTitleTC
+    TodolistType,
+    updateTodolistTitleTC
 } from "../../store/reducers/todolists-reducer";
 import {Task} from "../Task/Task";
 import {TaskStatuses} from "../../api/task-api";

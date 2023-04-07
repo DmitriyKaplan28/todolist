@@ -1,5 +1,5 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
-import styles from "../Todolist/Todolist.module.css";
+import styles from "../../features/Todolist/Todolist.module.css";
 import PostAddIcon from '@material-ui/icons/PostAdd';
 import {IconButton, TextField} from "@material-ui/core";
 

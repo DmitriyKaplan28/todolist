@@ -10,15 +10,20 @@ import {
     Typography
 } from "@material-ui/core";
 import {Menu} from "@material-ui/icons";
-import {AppRootStateType, useAppDispatch} from "../store/store";
+import {useAppDispatch} from "../store/store";
 import {useSelector} from "react-redux";
-import {initializeAppTC, RequestStatusType} from "../store/reducers/app-reducer";
+import {initializeAppTC} from "../store/reducers/app-reducer";
 import {TodolistsList} from "../features/TodolistsList/TodolistsList";
 import {ErrorSnackbar} from "../components/ErrorSnackbar/ErrorSnackbar";
 import {Navigate, Route, Routes} from "react-router-dom";
 import {Login} from "../features/Login/Login";
 import {logoutTC} from "../store/reducers/auth-reducer";
 import {CircularProgress} from "@mui/material";
+import {
+    selectIsInitialized,
+    selectIsLoggedIn,
+    selectStatus
+} from "../store/reducers/selectors";
 
 type AppPropsType = {
     demo?: boolean
@@ -26,9 +31,9 @@ type AppPropsType = {
 
 function App({demo = false}: AppPropsType) {
 
-    const status = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
-    const isInitialized = useSelector<AppRootStateType, boolean>(state => state.app.isInitialized)
-    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
+    const status = useSelector(selectStatus)
+    const isInitialized = useSelector(selectIsInitialized)
+    const isLoggedIn = useSelector(selectIsLoggedIn)
 
     const dispatch = useAppDispatch();
 
@@ -59,7 +64,8 @@ function App({demo = false}: AppPropsType) {
                     <Typography variant="h6">
                         Todolists
                     </Typography>
-                    {isLoggedIn && <Button onClick={handleLogout} color="inherit">Log out</Button>}
+                    {isLoggedIn &&
+                        <Button onClick={handleLogout} color="inherit">Log out</Button>}
                 </Toolbar>
             </AppBar>
             <Container fixed>
