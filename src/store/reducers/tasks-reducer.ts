@@ -21,7 +21,6 @@ export const fetchTasksTC = createAsyncThunk('tasks/fetchTasks', async (todolist
         if (!res.data.error) {
             const tasks = res.data.items
             thunkAPI.dispatch(setAppStatusAC({status: 'succeeded'}))
-            debugger
             return {tasks, todolistId}
         } else {
             thunkAPI.dispatch(setAppErrorAC({error: res.data.error}))
@@ -137,7 +136,6 @@ const tasksSlice = createSlice({
             builder.addCase(fetchTasksTC.fulfilled, (state, action) => {
                 if (action.payload)
                     state[action.payload.todolistId] = action.payload.tasks
-                debugger
                 console.log(action.payload && state[action.payload.todolistId])
             });
             builder.addCase(removeTaskTC.fulfilled, (state, action) => {
