@@ -12,39 +12,40 @@ type TasksPropsType = {
     todolistID: string
 }
 
-export const Task = React.memo((props: TasksPropsType) => {
+/*export const Task = React.memo((props: TasksPropsType) => {*/
+export const Task = React.memo(({task, todolistID}: TasksPropsType) => {
 
     const dispatch = useAppDispatch()
 
     const onClickHandler = useCallback(() => dispatch(removeTaskTC({
-        taskId: props.task.id,
-        todolistId: props.todolistID
-    })), [props.task.id, props.todolistID])
+        taskId: task.id,
+        todolistId: todolistID
+    })), [task.id, todolistID])
 
     const onChangeHandler = useCallback((event: ChangeEvent<HTMLInputElement>) => {
         let newIsDoneValue = event.currentTarget.checked ? TaskStatuses.Completed : TaskStatuses.InProgress
         dispatch(updateTaskTC({
-            taskId: props.task.id,
+            taskId: task.id,
             domainModel: {status: newIsDoneValue},
-            todolistId: props.todolistID,
+            todolistId: todolistID,
         }))
-    }, [props.task.id, props.todolistID])
+    }, [task.id, todolistID])
 
     const changeTaskTitle = useCallback((title: string) => {
         dispatch(updateTaskTC({
-            taskId: props.task.id, domainModel: {title}, todolistId: props.todolistID,
+            taskId: task.id, domainModel: {title}, todolistId: todolistID,
         }))
-    }, [props.task.id, props.todolistID])
+    }, [task.id, todolistID])
 
     return (
-        <ListItem key={props.task.id}>
+        <ListItem key={task.id}>
             <Checkbox
                 size={"small"}
                 color={"primary"}
-                checked={props.task.status === TaskStatuses.Completed}
+                checked={task.status === TaskStatuses.Completed}
                 onChange={onChangeHandler}/>
-            <EditableSpan title={props.task.title} setNewTitle={changeTaskTitle}
-                          disabled={props.task.entityStatus === 'loading'}/>
+            <EditableSpan title={task.title} setNewTitle={changeTaskTitle}
+                          disabled={task.entityStatus === 'loading'}/>
             <IconButton
                 size={"small"}
                 color={'secondary'}
