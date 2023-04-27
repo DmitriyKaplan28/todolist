@@ -1,4 +1,3 @@
-export {}
 import {
     addTaskTC,
     removeTaskTC,

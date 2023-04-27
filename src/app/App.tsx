@@ -52,7 +52,6 @@ function App({demo = false}: AppPropsType) {
             <CircularProgress/>
         </div>
     }
-
     return (
         <div className="App">
             <ErrorSnackbar/>

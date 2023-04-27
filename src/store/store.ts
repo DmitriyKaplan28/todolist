@@ -15,10 +15,10 @@ const rootReducer = combineReducers({
     auth: authReducer
 })
 
-//export const store = legacy_createStore(rootReducer, applyMiddleware(thunk));
 export const store = configureStore({
     reducer: rootReducer,
 })
+
 export const useAppDispatch = () => useDispatch<AppThunkType>()
 
 //types
