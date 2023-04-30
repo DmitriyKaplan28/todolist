@@ -12,7 +12,7 @@ const rootReducer = combineReducers({
 
 const initialGlobalState = {};
 
-/*export const storyBookStore = legacy_createStore(rootReducer, initialGlobalState as AppRootStateType);*/
+
 export const storyBookStore = configureStore({
     reducer: rootReducer,
 })
