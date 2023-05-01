@@ -57,6 +57,3 @@ export const UpdateTask = () => {
     }, [])
     return <div> {JSON.stringify(state)}</div>
 }
-
-
-

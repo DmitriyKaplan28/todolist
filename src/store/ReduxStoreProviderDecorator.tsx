@@ -12,7 +12,6 @@ const rootReducer = combineReducers({
 
 const initialGlobalState = {};
 
-
 export const storyBookStore = configureStore({
     reducer: rootReducer,
 })

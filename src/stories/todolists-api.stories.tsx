@@ -16,7 +16,6 @@ export const GetTodolists = () => {
     return <div> {JSON.stringify(state)}</div>
 }
 
-
 export const CreateTodolist = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
@@ -29,6 +28,7 @@ export const CreateTodolist = () => {
 
     return <div> {JSON.stringify(state)}</div>
 }
+
 export const DeleteTodolist = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
@@ -43,7 +43,6 @@ export const DeleteTodolist = () => {
     return <div> {JSON.stringify(state)}</div>
 }
 
-
 export const UpdateTodolistTitle = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
@@ -56,5 +55,3 @@ export const UpdateTodolistTitle = () => {
 
     return <div> {JSON.stringify(state)}</div>
 }
-
-
