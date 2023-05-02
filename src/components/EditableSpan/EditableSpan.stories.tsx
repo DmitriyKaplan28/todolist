@@ -6,7 +6,6 @@ import EditableSpan from "./EditableSpan";
 export default {
     title: 'Todolist/EditableSpan',
     component: EditableSpan,
-    // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
     argsTypes: {
         callback: {
             description: 'Value EditableSpan changed'
@@ -21,7 +20,8 @@ export default {
     }
 } as ComponentMeta<typeof EditableSpan>;
 
-const Template: ComponentStory<typeof EditableSpan> = (args) => <EditableSpan {...args} />;
+const Template: ComponentStory<typeof EditableSpan> = (args) =>
+    <EditableSpan {...args} />;
 
 export const EditableSpanStory = Template.bind({});
 
