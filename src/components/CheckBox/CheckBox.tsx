@@ -14,4 +14,3 @@ export const CheckBox = (props: PropsType) => {
                onChange={onChangeHandler}/>
     );
 };
-
