@@ -15,7 +15,6 @@ const AddItemForm = React.memo((props: AddItemFormPropsType) => {
 
     const onClickAddItem = () => {
         const trimmedTitle = title.trim()
-
         if (trimmedTitle) {
             props.addItem(trimmedTitle);
             setTitle("");
