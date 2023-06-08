@@ -18,6 +18,7 @@ const rootReducer = combineReducers({
 export const store = configureStore({
     reducer: rootReducer,
 })
+
 export const useAppDispatch = () => useDispatch<AppThunkType>()
 
 //types
