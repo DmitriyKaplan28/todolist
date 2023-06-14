@@ -7,6 +7,7 @@ import {appReducer} from "./reducers/app-reducer";
 import {authReducer} from "./reducers/auth-reducer";
 import {configureStore} from "@reduxjs/toolkit";
 
+
 //store
 const rootReducer = combineReducers({
     tasks: tasksReducer,
