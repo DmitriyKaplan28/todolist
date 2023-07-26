@@ -7,7 +7,7 @@ type EditableSpanPropsType = {
     disabled: boolean
 }
 
-const EditableSpan = (props: EditableSpanPropsType) => {
+const EditableSpan = ({setNewTitle,disabled, ...props}: EditableSpanPropsType) => {
 
     const [title, setTitle] = useState(props.title)
     const [editMode, setEditMode] = useState<boolean>(false)
@@ -15,7 +15,7 @@ const EditableSpan = (props: EditableSpanPropsType) => {
     const offEditMode = () => {
         if (title.trim()) {
             setEditMode(false)
-            props.setNewTitle(title)
+            setNewTitle(title)
         }
     }
     const onKeyPressOffEditMode = (e: KeyboardEvent<HTMLInputElement>) => e.key === "Enter" && offEditMode()
@@ -29,6 +29,7 @@ const EditableSpan = (props: EditableSpanPropsType) => {
                 autoFocus
                 onBlur={offEditMode}
                 onKeyDown={onKeyPressOffEditMode}
+                disabled={disabled}
             />
             : <span onDoubleClick={onEditMode}>{props.title}</span>
     );
