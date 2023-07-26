@@ -5,12 +5,12 @@ type PropsType = {
     callBack: (checkedValue: boolean) => void
 }
 
-export const CheckBox = (props: PropsType) => {
+export const CheckBox = ({isDone, callBack}: PropsType) => {
     const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-        props.callBack(event.currentTarget.checked)
+        callBack(event.currentTarget.checked)
     }
     return (
-        <input type="checkbox" checked={props.isDone}
+        <input type="checkbox" checked={isDone}
                onChange={onChangeHandler}/>
     );
 };
