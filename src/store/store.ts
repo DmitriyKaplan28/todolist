@@ -22,6 +22,7 @@ export const store = configureStore({
 
 export const useAppDispatch = () => useDispatch<AppThunkType>()
 
+
 //types
 export type AppRootStateType = ReturnType<typeof rootReducer>
 type AppThunkType = ThunkDispatch<AppRootStateType, void, AnyAction>
