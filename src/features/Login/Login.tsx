@@ -18,9 +18,7 @@ import {selectIsLoggedIn} from "../../store/reducers/selectors";
 export const Login = () => {
 
     const isLoggedIn = useSelector(selectIsLoggedIn)
-
     const dispatch = useAppDispatch();
-
     const formik = useFormik({
 
         initialValues: {
